@@ -12,11 +12,15 @@ private:
     int troncoSuperior;
     int troncoInferior;
     int resistencia;
-    int velocidad;
+    int Velocidad;
     int generacion;
     int supervivenciaGen;
+    int id;
 public:
-    Gladiador();
+    Gladiador(int id,int edad, int emocional, int condicionfisica, int troncoSuperior, int troncoinferiro, int velocidad, int generacion);
+    void Probabilidad();
+    void GeneracionesSupervivencia();
+    void resitencia();
 };
 
 #endif // GLADIADOR_H
