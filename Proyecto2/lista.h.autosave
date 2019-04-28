@@ -18,7 +18,6 @@ public:
     Nodo* solicitar(Nodo* nodoBuscar);
     int getcantidad();
     void imprimir();
-    int random();
 };
 
 #endif // LISTA_H

@@ -32,7 +32,7 @@ SOURCES += \
     lista.cpp \
     obstaculo.cpp \
     gladiador.cpp \
-    generacion.cpp
+    poblacion.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -41,7 +41,7 @@ HEADERS += \
     lista.h \
     obstaculo.h \
     gladiador.h \
-    generacion.h
+    poblacion.h
 
 FORMS += \
         mainwindow.ui

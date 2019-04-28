@@ -16,6 +16,8 @@ public:
     void cruces();
     void seleccion();
     void insercion();
+    void mutacion();
+    void creacion(int cantidad);
 
 };
 
