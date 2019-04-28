@@ -27,23 +27,23 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    nodo.cpp \
     tablero.cpp \
-    lista.cpp \
-    obstaculo.cpp \
     gladiador.cpp \
     cuadro.cpp \
-    torre.cpp
+    torre.cpp \
+    flecha.cpp \
+    node.cpp \
+    linkedlist.cpp
 
 HEADERS += \
         mainwindow.h \
-    nodo.h \
     tablero.h \
-    lista.h \
-    obstaculo.h \
     gladiador.h \
     cuadro.h \
-    torre.h
+    torre.h \
+    flecha.h \
+    node.h \
+    linkedlist.h
 
 FORMS += \
         mainwindow.ui

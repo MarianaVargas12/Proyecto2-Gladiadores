@@ -54,22 +54,22 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../Proyecto2/main.cpp \
 		../Proyecto2/mainwindow.cpp \
-		../Proyecto2/nodo.cpp \
 		../Proyecto2/tablero.cpp \
-		../Proyecto2/lista.cpp \
-		../Proyecto2/obstaculo.cpp \
 		../Proyecto2/gladiador.cpp \
 		../Proyecto2/cuadro.cpp \
-		../Proyecto2/torre.cpp moc_mainwindow.cpp
+		../Proyecto2/torre.cpp \
+		../Proyecto2/flecha.cpp \
+		../Proyecto2/node.cpp \
+		../Proyecto2/linkedlist.cpp moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
-		nodo.o \
 		tablero.o \
-		lista.o \
-		obstaculo.o \
 		gladiador.o \
 		cuadro.o \
 		torre.o \
+		flecha.o \
+		node.o \
+		linkedlist.o \
 		moc_mainwindow.o
 DIST          = /opt/qt/5.13.0/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/qt/5.13.0/gcc_64/mkspecs/common/unix.conf \
@@ -267,21 +267,21 @@ DIST          = /opt/qt/5.13.0/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/qt/5.13.0/gcc_64/mkspecs/features/yacc.prf \
 		/opt/qt/5.13.0/gcc_64/mkspecs/features/lex.prf \
 		../Proyecto2/Proyecto2.pro ../Proyecto2/mainwindow.h \
-		../Proyecto2/nodo.h \
 		../Proyecto2/tablero.h \
-		../Proyecto2/lista.h \
-		../Proyecto2/obstaculo.h \
 		../Proyecto2/gladiador.h \
 		../Proyecto2/cuadro.h \
-		../Proyecto2/torre.h ../Proyecto2/main.cpp \
+		../Proyecto2/torre.h \
+		../Proyecto2/flecha.h \
+		../Proyecto2/node.h \
+		../Proyecto2/linkedlist.h ../Proyecto2/main.cpp \
 		../Proyecto2/mainwindow.cpp \
-		../Proyecto2/nodo.cpp \
 		../Proyecto2/tablero.cpp \
-		../Proyecto2/lista.cpp \
-		../Proyecto2/obstaculo.cpp \
 		../Proyecto2/gladiador.cpp \
 		../Proyecto2/cuadro.cpp \
-		../Proyecto2/torre.cpp
+		../Proyecto2/torre.cpp \
+		../Proyecto2/flecha.cpp \
+		../Proyecto2/node.cpp \
+		../Proyecto2/linkedlist.cpp
 QMAKE_TARGET  = Proyecto2
 DESTDIR       = 
 TARGET        = Proyecto2
@@ -707,8 +707,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/qt/5.13.0/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Proyecto2/mainwindow.h ../Proyecto2/nodo.h ../Proyecto2/tablero.h ../Proyecto2/lista.h ../Proyecto2/obstaculo.h ../Proyecto2/gladiador.h ../Proyecto2/cuadro.h ../Proyecto2/torre.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Proyecto2/main.cpp ../Proyecto2/mainwindow.cpp ../Proyecto2/nodo.cpp ../Proyecto2/tablero.cpp ../Proyecto2/lista.cpp ../Proyecto2/obstaculo.cpp ../Proyecto2/gladiador.cpp ../Proyecto2/cuadro.cpp ../Proyecto2/torre.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Proyecto2/mainwindow.h ../Proyecto2/tablero.h ../Proyecto2/gladiador.h ../Proyecto2/cuadro.h ../Proyecto2/torre.h ../Proyecto2/flecha.h ../Proyecto2/node.h ../Proyecto2/linkedlist.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Proyecto2/main.cpp ../Proyecto2/mainwindow.cpp ../Proyecto2/tablero.cpp ../Proyecto2/gladiador.cpp ../Proyecto2/cuadro.cpp ../Proyecto2/torre.cpp ../Proyecto2/flecha.cpp ../Proyecto2/node.cpp ../Proyecto2/linkedlist.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Proyecto2/mainwindow.ui $(DISTDIR)/
 
 
@@ -991,7 +991,11 @@ main.o: ../Proyecto2/main.cpp ../Proyecto2/mainwindow.h \
 		/opt/qt/5.13.0/gcc_64/include/QtGui/qguiapplication.h \
 		/opt/qt/5.13.0/gcc_64/include/QtGui/qinputmethod.h \
 		../Proyecto2/tablero.h \
-		../Proyecto2/cuadro.h
+		../Proyecto2/cuadro.h \
+		../Proyecto2/torre.h \
+		../Proyecto2/linkedlist.h \
+		../Proyecto2/node.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Proyecto2/main.cpp
 
 mainwindow.o: ../Proyecto2/mainwindow.cpp ../Proyecto2/mainwindow.h \
@@ -1122,23 +1126,76 @@ mainwindow.o: ../Proyecto2/mainwindow.cpp ../Proyecto2/mainwindow.h \
 		/opt/qt/5.13.0/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Proyecto2/mainwindow.cpp
 
-nodo.o: ../Proyecto2/nodo.cpp ../Proyecto2/nodo.h \
-		../Proyecto2/obstaculo.h \
-		../Proyecto2/gladiador.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nodo.o ../Proyecto2/nodo.cpp
-
 tablero.o: ../Proyecto2/tablero.cpp ../Proyecto2/tablero.h \
-		../Proyecto2/cuadro.h
+		../Proyecto2/cuadro.h \
+		../Proyecto2/torre.h \
+		../Proyecto2/linkedlist.h \
+		../Proyecto2/node.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/QDebug \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qdebug.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qglobal.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qconfig.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qlogging.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qflags.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qatomic.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qatomic_msvc.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qmutex.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qnumeric.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qhash.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qchar.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qiterator.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qlist.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qrefcount.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qarraydata.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qstring.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qbytearray.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qnamespace.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qstringview.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qpair.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qvector.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qpoint.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qstringlist.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qregexp.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qmap.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qtextstream.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qiodevice.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qobject.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qmetatype.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qlocale.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qvariant.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qshareddata.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qset.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qsharedpointer_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tablero.o ../Proyecto2/tablero.cpp
-
-lista.o: ../Proyecto2/lista.cpp ../Proyecto2/lista.h \
-		../Proyecto2/nodo.h \
-		../Proyecto2/obstaculo.h \
-		../Proyecto2/gladiador.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o lista.o ../Proyecto2/lista.cpp
-
-obstaculo.o: ../Proyecto2/obstaculo.cpp ../Proyecto2/obstaculo.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obstaculo.o ../Proyecto2/obstaculo.cpp
 
 gladiador.o: ../Proyecto2/gladiador.cpp ../Proyecto2/gladiador.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gladiador.o ../Proyecto2/gladiador.cpp
@@ -1148,6 +1205,80 @@ cuadro.o: ../Proyecto2/cuadro.cpp ../Proyecto2/cuadro.h
 
 torre.o: ../Proyecto2/torre.cpp ../Proyecto2/torre.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o torre.o ../Proyecto2/torre.cpp
+
+flecha.o: ../Proyecto2/flecha.cpp ../Proyecto2/flecha.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o flecha.o ../Proyecto2/flecha.cpp
+
+node.o: ../Proyecto2/node.cpp ../Proyecto2/node.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o node.o ../Proyecto2/node.cpp
+
+linkedlist.o: ../Proyecto2/linkedlist.cpp ../Proyecto2/linkedlist.h \
+		../Proyecto2/node.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/QDebug \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qdebug.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qglobal.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qconfig.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qlogging.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qflags.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qatomic.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qatomic_msvc.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qmutex.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qnumeric.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qhash.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qchar.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qiterator.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qlist.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qrefcount.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qarraydata.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qstring.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qbytearray.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qnamespace.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qstringview.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qpair.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qvector.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qpoint.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qstringlist.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qregexp.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qmap.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qtextstream.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qiodevice.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qobject.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qmetatype.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qlocale.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qvariant.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qshareddata.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qset.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/qt/5.13.0/gcc_64/include/QtCore/qsharedpointer_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o linkedlist.o ../Proyecto2/linkedlist.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

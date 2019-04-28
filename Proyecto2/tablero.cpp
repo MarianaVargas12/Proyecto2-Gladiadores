@@ -10,22 +10,25 @@ Tablero::Tablero()
             nuevoCuadro->setX(xInicial);
             nuevoCuadro->setY(yInicial);
             cuadricula[i][j] = nuevoCuadro;
-            yInicial+=100;
+            yInicial+=60;
         }
         yInicial = 0;
-        xInicial+= 100;
+        xInicial+= 60;
 
     }
 }
 
 void Tablero::generarTorre()
 {
-    int xRand = rand()%10 +1;
-    int yRand = rand()%10 +1;
+    int xRand = rand()%10;
+    int yRand = rand()%10;
     if(cuadricula[xRand][yRand]->ocupado == false){
         torre* torreRandom = new torre();
         torreRandom->setX(cuadricula[xRand][yRand]->getX());
         torreRandom->setY(cuadricula[xRand][yRand]->getY());
+        cuadricula[xRand][yRand]->ocupado = true;
+        listaTorres.Add(torreRandom);
+
     }
 
 }
