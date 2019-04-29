@@ -25,7 +25,7 @@ public:
     //! \param xActual X en el que se encuentra la torre
     //! \param yActual Y en el que se encuentra la torre
     //!
-    void actualizarCuadrosAlcance(int xActual,int yActual);
+    void actualizarCuadrosAlcance();
 };
 
 #endif // TORRE_H

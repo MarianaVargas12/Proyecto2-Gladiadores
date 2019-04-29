@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 
     for (Node* torreA = Tablero::getInstance().listaTorres.getFirst();torreA!=nullptr; torreA = torreA->getNext()) {
         torre* asd = ((torre*)torreA);
-        cout<<"Tipo de torre "<<asd->getX() <<endl;
+        cout<<"Tipo de torre "<<asd->tipo <<endl;
     }
 
 //    MainWindow w;

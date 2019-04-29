@@ -5,8 +5,7 @@
 #include <QDebug>
 torre::torre()
 {
-        srand(time(0));
-        tipo = rand()%3+1;
+        tipo = rand()%3;
 }
 
 int torre::getX() const
@@ -29,9 +28,9 @@ void torre::setY(int value)
     y = value;
 }
 
-void torre::actualizarCuadrosAlcance(int xActual, int yActual){
-    int i = xActual / 60;
-    int j = yActual / 60;
+void torre::actualizarCuadrosAlcance(){
+    int i = this->getX() /60;  // xActual / 60;
+    int j = this->getY() /60; //yActual / 60;
 
     if(i==9 && j == 0){//esquina derecha superior
         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j]);
@@ -84,5 +83,47 @@ void torre::actualizarCuadrosAlcance(int xActual, int yActual){
     else {
        qDebug()<<"No se puede construir una torre en el punto de salida o el de llegada";
     }
+
+}
+
+void torre::moverse(){
+    //numero random para la direccion en la que se va a mover
+    int movimiento = rand()%4+1;
+    /*1 arriba
+     *2 derecha
+     *3 abajo
+     *4 izquieda
+     */
+    switch (movimiento) {//verifica que el campo al que se va a mover sea valido y no este ocupado
+    case 1:
+        if(this->getY() / 60 != 0 && Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60 - 1]->ocupado == false){
+            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = false;
+            this->setY(this->getY()-60);
+            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = true;
+        }
+        break;
+    case 2:
+        if(this->getX() / 60 != 9 && Tablero::getInstance().cuadricula[this->getX()/60 + 1][this->getY()/60]->ocupado == false){
+            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = false;
+            this->setX(this->getX()+60);
+            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = true;
+        }
+        break;
+    case 3:
+        if(this->getY() / 60 != 9 && Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60 + 1]->ocupado == false){
+            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = false;
+            this->setY(this->getY()+60);
+            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = true;
+        }
+        break;
+    case 4:
+        if(this->getX() / 60 != 0 && Tablero::getInstance().cuadricula[this->getX()/60 - 1][this->getY()/60]->ocupado == false){
+            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = false;
+            this->setX(this->getX()-60);
+            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = true;
+        }
+        break;
+    }
+    actualizarCuadrosAlcance();
 }
 
