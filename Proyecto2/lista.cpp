@@ -12,8 +12,8 @@ int Lista::getcantidad(){
     return this->cantidad;
 }
 void Lista::agregarIinicio(Nodo *nuevoNodo){
-   nuevoNodo->setSiguiente(Head);
-   Head = nuevoNodo;
+   nuevoNodo->setSiguiente(this->Head);
+   this->Head = nuevoNodo;
 }
 
 void Lista::agregarFinal(Nodo *nuevoNodo){
@@ -58,13 +58,4 @@ Nodo* Lista::solicitar(Nodo *nodoBuscar){
         }
         cout<<"no se encontro elemento"<<endl;
     }
-}
-int Lista::random(){
-    int r = rand() % 2;
-    for (int i=0;i<6;i++) {
-        r = rand() % 2;
-        std::cout << " rnum: " << r;
-    }
-    std::cout << " termina " <<endl;
-    return 1;
 }

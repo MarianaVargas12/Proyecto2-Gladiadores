@@ -7,7 +7,7 @@ using namespace std;
 class Lista
 {
 private:
-    Nodo* Head;
+    Nodo* Head= nullptr;
     int cantidad;
 
 public:
@@ -18,7 +18,6 @@ public:
     Nodo* solicitar(Nodo* nodoBuscar);
     int getcantidad();
     void imprimir();
-    int random();
 };
 
 #endif // LISTA_H

@@ -19,7 +19,7 @@ private:
     int vida;
     int fitness;
 public:
-    Gladiador(int vida,int id,int edad, int emocional, int condicionfisica, int troncoSuperior, int troncoinferiro, int velocidad, int generacion);
+    Gladiador(int vida,int id,int edad, int emocional,int condicionfisica, int troncoSuperior, int troncoinferiro, int velocidad, int generacion);
     void setProbabilidad(int maximaResistencia);
     void setGeneracionesSupervivencia();
     void setresitencia();
@@ -35,6 +35,8 @@ public:
     int getSupervivncia();
     int getId();
     int getFitness();
+    int getVida();
+    void setFitness();
 };
 
 #endif // GLADIADOR_H

@@ -12,10 +12,11 @@ Gladiador::Gladiador(int vida,int id,int edad, int emocional, int condicionfisic
     this->generacion=generacion;
     this->vida=vida;
     setresitencia();
+    setFitness();
 }
 
-void Gladiador::setProbabilidad(int maximaResistencia){
-    this->probabilidad=resistencia*maximaResistencia/100;
+void Gladiador::setProbabilidad(int maximoFitness){
+    this->probabilidad=fitness*maximoFitness/100;
     setGeneracionesSupervivencia();
 }
 void Gladiador::setGeneracionesSupervivencia(){
@@ -74,4 +75,10 @@ int Gladiador::getId(){
 }
 int Gladiador::getFitness(){
     return this->fitness;
+}
+int Gladiador::getVida(){
+    return this->vida;
+}
+void Gladiador::setFitness(){
+    this->fitness= Velocidad+condicionFisica+troncoSuperior+troncoInferior-edad;
 }
