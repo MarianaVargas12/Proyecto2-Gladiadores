@@ -33,27 +33,25 @@ SOURCES += \
     torre.cpp \
     flecha.cpp \
     node.cpp \
-    linkedlist.cpp \
-    generacion.cpp \
-    lista.cpp \
     nodo.cpp \
+    lista.cpp \
     obstaculo.cpp \
-    poblacion.cpp
+    poblacion.cpp \
+    linkedlist.cpp
 
 HEADERS += \
         mainwindow.h \
+    nodo.h \
     tablero.h \
+    lista.h \
+    obstaculo.h \
+    poblacion.h \
     gladiador.h \
     cuadro.h \
     torre.h \
     flecha.h \
     node.h \
-    linkedlist.h \
-    generacion.h \
-    lista.h \
-    nodo.h \
-    obstaculo.h \
-    poblacion.h
+    linkedlist.h
 
 FORMS += \
         mainwindow.ui

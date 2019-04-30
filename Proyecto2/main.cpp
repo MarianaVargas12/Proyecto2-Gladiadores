@@ -6,11 +6,18 @@
 #include "linkedlist.h"
 #include "torre.h"
 using namespace std;
+#include <stdlib.h>
+#include "lista.h"
+#include "poblacion.h"
 int main(int argc, char *argv[])
 {
-    srand(time(0));
-   // QApplication a(argc, argv);
-   //Tablero *tablero = new Tablero();
+    Poblacion* poblacion1=new Poblacion();
+    poblacion1->poblacionInicial(5);
+    poblacion1->seleccion();
+    poblacion1->creacion(5);
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
 
         Tablero::getInstance().generarTorre();
 
