@@ -10,12 +10,11 @@ int main(int argc, char *argv[])
 {
     srand(time(0));
    // QApplication a(argc, argv);
-    //Tablero *tablero = new Tablero();
+   //Tablero *tablero = new Tablero();
 
-
-    for (int x = 0;x<10;x++) {
         Tablero::getInstance().generarTorre();
-    }
+
+
     for (int i = 0;i<10;i++) {
         cout<<""<<endl;
         for (int j = 0;j<10;j++) {
@@ -26,13 +25,17 @@ int main(int argc, char *argv[])
                 cout<<"0"<<",";
             }
         }
-
     }
 
-    for (Node* torreA = Tablero::getInstance().listaTorres.getFirst();torreA!=nullptr; torreA = torreA->getNext()) {
-        torre* asd = ((torre*)torreA);
-        cout<<"Tipo de torre "<<asd->getX() <<endl;
+    for (Node* torreA = Tablero::getInstance().listaTorres->getFirst();torreA!=nullptr; torreA = torreA->getNext()) {
+        torre* asd = ((torre*)torreA->getData());
+        cout<<asd->getX()/60<<","<<asd->getY()/60<<endl;
+        for (Node* cuadroA = asd->cuadrosAlcance.getFirst();cuadroA!=nullptr;cuadroA=cuadroA->getNext()) {
+            cuadro* cuadroB = (cuadro*)cuadroA->getData();
+            qDebug()<<cuadroB->getX()/60<<","<<cuadroB->getY()/60;
+        }
     }
+
 
 //    MainWindow w;
 //    w.show();

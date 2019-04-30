@@ -5,7 +5,9 @@
 #include <QDebug>
 torre::torre()
 {
-        tipo = rand()%3;
+        int r= rand();
+        this->tipo = (r%3)+1;
+
 }
 
 int torre::getX() const
@@ -43,11 +45,11 @@ void torre::actualizarCuadrosAlcance(){
         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-1]);
     }
     else if(i==0 && j >= 1 && j <=8){//pegando a la izquierda
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-1]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j-1]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+1]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j+1]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+1]);
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-1]);//arriba
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j-1]);//diagonal derecha arriba
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j]);//derecha
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j+1]);//diagonal derecha abajo
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+1]);//abajo
     }
     else if(i==9 && j >=1 && j <=8){//pegando a la derecha
         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-1]);
@@ -64,21 +66,21 @@ void torre::actualizarCuadrosAlcance(){
         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j]);
     }
     else if(i>=0 && i<=8 && j==9){//pegando abajo
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j+1]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+1]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j+1]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j]);
+         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-1]);//arriba
+         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j]);//derecha
+         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j]);//izquierda
+         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j-1]);//diagonal derecha arriba
+         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j-1]);//diagonal izquierda arriba
     }
     else if(i>=1 && i <= 8 && j>=1 && j<=8){//centro
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+1]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j+1]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j+1]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+1]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j+1]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j-1]);
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-1]);//arriba
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j+1]);//diagonal derecha abajo
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j]);//derecha
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j-1]);//diagonal derecha arriba
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+1]);//abajo
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j+1]);//diagonal izquierda abajo
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j]);//izquierda
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j-1]);//diagonal izquierda arriba
     }
     else {
        qDebug()<<"No se puede construir una torre en el punto de salida o el de llegada";

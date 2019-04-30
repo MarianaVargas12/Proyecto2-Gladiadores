@@ -18,6 +18,7 @@ Tablero::Tablero()
     }
 }
 
+
 void Tablero::generarTorre()
 {
 
@@ -30,7 +31,7 @@ void Tablero::generarTorre()
             torreRandom->setY(cuadricula[xRand][yRand]->getY());
             torreRandom->actualizarCuadrosAlcance();
             cuadricula[xRand][yRand]->ocupado = true;
-            listaTorres.Add(torreRandom);
+            listaTorres->Add(torreRandom);
         }
     }
     else {
