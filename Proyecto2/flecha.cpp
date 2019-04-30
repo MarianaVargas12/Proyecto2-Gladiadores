@@ -18,7 +18,6 @@ flecha::flecha(int tipoTorre)
         rango = 2;
         break;
     }
-
 }
 
 void flecha::mover(int xObjetivo, int yObjetivo){//..........Agregar condicion del rango y la accion al llegar
@@ -35,7 +34,6 @@ void flecha::mover(int xObjetivo, int yObjetivo){//..........Agregar condicion d
         if(yObjetivo > y){//abajo
             y += 5;
         }
-
     }
 }
 
