@@ -31,7 +31,8 @@ SOURCES += \
     tablero.cpp \
     lista.cpp \
     obstaculo.cpp \
-    gladiador.cpp
+    gladiador.cpp \
+    poblacion.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,7 +40,8 @@ HEADERS += \
     tablero.h \
     lista.h \
     obstaculo.h \
-    gladiador.h
+    gladiador.h \
+    poblacion.h
 
 FORMS += \
         mainwindow.ui

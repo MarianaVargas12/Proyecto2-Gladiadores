@@ -12,8 +12,8 @@ int Lista::getcantidad(){
     return this->cantidad;
 }
 void Lista::agregarIinicio(Nodo *nuevoNodo){
-   nuevoNodo->setSiguiente(Head);
-   Head = nuevoNodo;
+   nuevoNodo->setSiguiente(this->Head);
+   this->Head = nuevoNodo;
 }
 
 void Lista::agregarFinal(Nodo *nuevoNodo){

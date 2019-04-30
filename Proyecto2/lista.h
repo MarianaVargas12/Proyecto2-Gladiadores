@@ -7,7 +7,7 @@ using namespace std;
 class Lista
 {
 private:
-    Nodo* Head;
+    Nodo* Head= nullptr;
     int cantidad;
 
 public:
