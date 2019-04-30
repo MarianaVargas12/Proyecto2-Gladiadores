@@ -1,6 +1,6 @@
 #include "lista.h"
 
-lista::lista()
+Lista::Lista()
 {
 
 }

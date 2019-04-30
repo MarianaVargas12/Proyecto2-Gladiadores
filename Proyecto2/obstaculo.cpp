@@ -1,6 +1,6 @@
 #include "obstaculo.h"
 
-obstaculo::obstaculo()
+Obstaculo::Obstaculo()
 {
 
 }

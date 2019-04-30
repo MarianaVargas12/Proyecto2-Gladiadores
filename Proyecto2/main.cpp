@@ -9,6 +9,7 @@ using namespace std;
 #include <stdlib.h>
 #include "lista.h"
 #include "poblacion.h"
+
 int main(int argc, char *argv[])
 {
     Poblacion* poblacion1=new Poblacion();

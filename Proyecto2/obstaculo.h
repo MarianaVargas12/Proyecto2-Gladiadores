@@ -2,10 +2,10 @@
 #define OBSTACULO_H
 
 
-class obstaculo
+class Obstaculo
 {
 public:
-    obstaculo();
+    Obstaculo();
 };
 
 #endif // OBSTACULO_H
