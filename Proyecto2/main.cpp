@@ -11,8 +11,10 @@ int main(int argc, char *argv[])
     srand(time(0));
    // QApplication a(argc, argv);
    //Tablero *tablero = new Tablero();
-
+    for ( int x = 0;x<10; x++) {
         Tablero::getInstance().generarTorre();
+    }
+
 
 
     for (int i = 0;i<10;i++) {
@@ -29,7 +31,6 @@ int main(int argc, char *argv[])
 
     for (Node* torreA = Tablero::getInstance().listaTorres->getFirst();torreA!=nullptr; torreA = torreA->getNext()) {
         torre* asd = ((torre*)torreA->getData());
-        cout<<asd->getX()/60<<","<<asd->getY()/60<<endl;
         for (Node* cuadroA = asd->cuadrosAlcance.getFirst();cuadroA!=nullptr;cuadroA=cuadroA->getNext()) {
             cuadro* cuadroB = (cuadro*)cuadroA->getData();
             qDebug()<<cuadroB->getX()/60<<","<<cuadroB->getY()/60;

@@ -102,16 +102,16 @@ void torre::actualizarCuadrosAlcance(){
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j+2]);//diagonal izquierda abajo
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+2]);//abajo
         }
-        else if (i ==9 && j ==9) { //excepcion abajo
+        else if (i == 9 && j == 8) { //excepcion abajo
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-1]);
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j-1]);
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j]);
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j+1]);
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+1]);
 
-            cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-2]);//izquierda
-            cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j-2]);//diagonal izquierda arriba
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-2]);//arriba
+            cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j-2]);//diagonal izquierda arriba
+            cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j]);//izquierda
         }
         else{
         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-1]);
@@ -127,7 +127,7 @@ void torre::actualizarCuadrosAlcance(){
         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+2]);
         }
     }
-    else if(i>=0 && i<=8 && j==0){//pegando arriba
+    else if(i>=1 && i<=8 && j==0){//pegando arriba
         if(i==1 && j ==0){//excepcion izquierda
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j]);
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j+1]);
@@ -164,7 +164,7 @@ void torre::actualizarCuadrosAlcance(){
         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j]);
         }
     }
-    else if(i>=0 && i<=8 && j==9){//pegando abajo
+    else if(i>=1 && i<=8 && j==9){//pegando abajo
         if(i == 1 && j == 9){ //excepcion izquierda
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-1]);//arriba
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j]);//derecha
@@ -245,7 +245,7 @@ void torre::actualizarCuadrosAlcance(){
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j-2]);//diagonal derecha arriba
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j]);//derecha
         }
-        else if (i == 1 && j == 8) {//excepcion derecha abajo
+        else if (i == 8 && j == 8) {//excepcion derecha abajo
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-1]);//arriba
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j+1]);//diagonal derecha abajo
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j]);//derecha
@@ -259,7 +259,7 @@ void torre::actualizarCuadrosAlcance(){
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j-2]);//diagonal izquierda arriba
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j]);//izquierda
         }
-        else if (i <= 2 && i <= 7 && j == 1) {//excepcion linea arriba
+        else if (i >= 2 && i <= 7 && j == 1) {//excepcion linea arriba
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-1]);//arriba
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j+1]);//diagonal derecha abajo
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j]);//derecha
@@ -275,7 +275,7 @@ void torre::actualizarCuadrosAlcance(){
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j]);//izquierda
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j]);//derecha
         }
-        else if (i <= 2 && i <= 7 && j == 8) {//excepcion linea abajo
+        else if (i >= 2 && i <= 7 && j == 8) {//excepcion linea abajo
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-1]);//arriba
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j+1]);//diagonal derecha abajo
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j]);//derecha
@@ -291,7 +291,7 @@ void torre::actualizarCuadrosAlcance(){
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j]);//izquierda
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j]);//derecha
         }
-        else if (i <= 2 && i <= 7 && j == 8) {//excepcion linea derecha
+        else if (i == 8 && j >= 2 && j <= 7) {//excepcion linea derecha
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-1]);//arriba
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j+1]);//diagonal derecha abajo
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j]);//derecha
@@ -307,7 +307,7 @@ void torre::actualizarCuadrosAlcance(){
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j]);//izquierda
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+2]);//abajo
         }
-        else if (i <= 2 && i <= 7 && j == 8) {//excepcion linea izquierda
+        else if (i == 1 && j >= 2 && j <= 7) {//excepcion linea izquierda
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-1]);//arriba
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j+1]);//diagonal derecha abajo
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j]);//derecha
