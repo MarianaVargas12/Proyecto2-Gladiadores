@@ -27,17 +27,22 @@ void Tablero::generarTorre()
     int xRand = rand()%10;
     int yRand = rand()%10;
     if(xRand != 0 && yRand != 0 || xRand != 9 && yRand !=9){
-        if(cuadricula[xRand][yRand]->ocupado == false){
-            torre* torreRandom = new torre();
-            torreRandom->setX(cuadricula[xRand][yRand]->getX());
-            torreRandom->setY(cuadricula[xRand][yRand]->getY());
-            torreRandom->actualizarCuadrosAlcance();
-            cuadricula[xRand][yRand]->ocupado = true;
-            listaTorres->Add(torreRandom);
+        if(xRand == 0 && yRand == 0){
+            qDebug()<<"No se pudo generar la torre ya que coincidia con el punto de incio";
         }
-    }
-    else {
-        qDebug()<<"No se pudo generar la torre ya que coincidia con el punto de incio o el final";
+        else if (xRand == 9 && yRand == 9) {
+            qDebug()<<"No se pudo generar la torre ya que coincidia con el punto Final";
+        }
+        else{
+            if(cuadricula[xRand][yRand]->ocupado == false){
+                torre* torreRandom = new torre();
+                torreRandom->setX(cuadricula[xRand][yRand]->getX());
+                torreRandom->setY(cuadricula[xRand][yRand]->getY());
+                torreRandom->actualizarCuadrosAlcance();
+                cuadricula[xRand][yRand]->ocupado = true;
+                listaTorres->Add(torreRandom);
+            }
+        }
     }
 }
 
