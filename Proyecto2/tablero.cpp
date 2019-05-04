@@ -1,4 +1,6 @@
 #include "tablero.h"
+#include "iostream"
+using namespace std;
 
 Tablero::Tablero()
 {
@@ -36,5 +38,26 @@ void Tablero::generarTorre()
     }
     else {
         qDebug()<<"No se pudo generar la torre ya que coincidia con el punto de incio o el final";
+    }
+}
+
+void Tablero::generarMatriz()
+{
+    for (int i = 0;i<10;i++) {
+        cout<<""<<endl;
+        for (int j = 0;j<10;j++) {
+            if(Tablero::getInstance().cuadricula[j][i]->ocupado == true){
+
+                for (Node* nodoTorre = Tablero::getInstance().listaTorres->getFirst(); nodoTorre != nullptr ; nodoTorre = nodoTorre->getNext()){
+                    torre* TorrePrueba = (torre*)nodoTorre->getData();
+                    if (TorrePrueba->getX() == Tablero::getInstance().cuadricula[j][i]->getX() && TorrePrueba->getY() == Tablero::getInstance().cuadricula[j][i]->getY()){
+                        cout<<TorrePrueba->tipo<<",";
+                    }
+                }
+            }
+            else {
+                cout<<"0"<<",";
+            }
+        }
     }
 }

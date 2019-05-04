@@ -14,29 +14,14 @@ int main(int argc, char *argv[])
     for ( int x = 0;x<10; x++) {
         Tablero::getInstance().generarTorre();
     }
+    Tablero::getInstance().generarMatriz();
 
-
-
-    for (int i = 0;i<10;i++) {
-        cout<<""<<endl;
-        for (int j = 0;j<10;j++) {
-            if(Tablero::getInstance().cuadricula[j][i]->ocupado == true){
-                cout<<"1"<<",";
-            }
-            else {
-                cout<<"0"<<",";
-            }
-        }
+    for (Node* nodoTorre = Tablero::getInstance().listaTorres->getFirst();nodoTorre!=nullptr;nodoTorre=nodoTorre->getNext()) {
+        torre* torreA = (torre*)nodoTorre->getData();
+        torreA->moverse();
     }
-
-    for (Node* torreA = Tablero::getInstance().listaTorres->getFirst();torreA!=nullptr; torreA = torreA->getNext()) {
-        torre* asd = ((torre*)torreA->getData());
-        for (Node* cuadroA = asd->cuadrosAlcance.getFirst();cuadroA!=nullptr;cuadroA=cuadroA->getNext()) {
-            cuadro* cuadroB = (cuadro*)cuadroA->getData();
-            qDebug()<<cuadroB->getX()/60<<","<<cuadroB->getY()/60;
-        }
-    }
-
+    cout<<""<<endl;
+    Tablero::getInstance().generarMatriz();
 
 //    MainWindow w;
 //    w.show();

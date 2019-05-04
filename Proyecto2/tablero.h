@@ -21,6 +21,7 @@ public:
     //! \brief generarTorre crea una torre y la coloca en algun lugar aleatorio del tablero
     //!
     void generarTorre();
+    void generarMatriz();
     LinkedList *listaTorres = new LinkedList();
 };
 

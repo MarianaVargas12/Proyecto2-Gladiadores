@@ -359,14 +359,15 @@ void torre::moverse(){
      */
     switch (movimiento) {//verifica que el campo al que se va a mover sea valido y no este ocupado
     case 1:
-        if(this->getY() / 60 != 0 && Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60 - 1]->ocupado == false){
+        if(this->getY() / 60 != 0 && Tablero::getInstance().cuadricula[this->getX()/60][(this->getY()/60) - 1]->ocupado == false){
             Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = false;
             this->setY(this->getY()-60);
             Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = true;
         }
+
         break;
     case 2:
-        if(this->getX() / 60 != 9 && Tablero::getInstance().cuadricula[this->getX()/60 + 1][this->getY()/60]->ocupado == false){
+        if((this->getX()/60) != 9 && Tablero::getInstance().cuadricula[(this->getX()/60) + 1][this->getY()/60]->ocupado == false){
             Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = false;
             this->setX(this->getX()+60);
             Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = true;
