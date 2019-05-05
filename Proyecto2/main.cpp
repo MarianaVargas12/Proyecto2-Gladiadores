@@ -12,38 +12,20 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    Poblacion* poblacion1=new Poblacion();
-    poblacion1->poblacionInicial(5);
-    poblacion1->seleccion();
-    poblacion1->creacion(5);
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-
+    srand(time(0));
+   // QApplication a(argc, argv);
+   //Tablero *tablero = new Tablero();
+    for ( int x = 0;x<10; x++) {
         Tablero::getInstance().generarTorre();
-
-
-    for (int i = 0;i<10;i++) {
-        cout<<""<<endl;
-        for (int j = 0;j<10;j++) {
-            if(Tablero::getInstance().cuadricula[j][i]->ocupado == true){
-                cout<<"1"<<",";
-            }
-            else {
-                cout<<"0"<<",";
-            }
-        }
     }
+    Tablero::getInstance().generarMatriz();
 
-    for (Node* torreA = Tablero::getInstance().listaTorres->getFirst();torreA!=nullptr; torreA = torreA->getNext()) {
-        torre* asd = ((torre*)torreA->getData());
-        cout<<asd->getX()/60<<","<<asd->getY()/60<<endl;
-        for (Node* cuadroA = asd->cuadrosAlcance.getFirst();cuadroA!=nullptr;cuadroA=cuadroA->getNext()) {
-            cuadro* cuadroB = (cuadro*)cuadroA->getData();
-            qDebug()<<cuadroB->getX()/60<<","<<cuadroB->getY()/60;
-        }
+    for (Node* nodoTorre = Tablero::getInstance().listaTorres->getFirst();nodoTorre!=nullptr;nodoTorre=nodoTorre->getNext()) {
+        torre* torreA = (torre*)nodoTorre->getData();
+        torreA->moverse();
     }
-
+    cout<<""<<endl;
+    Tablero::getInstance().generarMatriz();
 
 //    MainWindow w;
 //    w.show();
