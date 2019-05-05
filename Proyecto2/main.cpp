@@ -9,6 +9,8 @@ using namespace std;
 #include <stdlib.h>
 #include "lista.h"
 #include "poblacion.h"
+#include "socket.h"
+#include "serializador.h"
 
 int main(int argc, char *argv[])
 {
@@ -26,6 +28,10 @@ int main(int argc, char *argv[])
     }
     cout<<""<<endl;
     Tablero::getInstance().generarMatriz();
+    int mat[10][10] = {{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},
+                       {0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0}};
+    string mensaje = serializador::getInstance().serializarTableroGladiador(mat,35,10,80,20,10,1,10001,80,60);
+    Socket::getInstance().escuchaEnvia(8080, mensaje);
 
 //    MainWindow w;
 //    w.show();

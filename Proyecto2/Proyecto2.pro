@@ -37,7 +37,9 @@ SOURCES += \
     lista.cpp \
     obstaculo.cpp \
     poblacion.cpp \
-    linkedlist.cpp
+    serializador.cpp \
+    linkedlist.cpp \
+    socket.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -51,7 +53,9 @@ HEADERS += \
     torre.h \
     flecha.h \
     node.h \
-    linkedlist.h
+    serializador.h \
+    linkedlist.h \
+    socket.h
 
 FORMS += \
         mainwindow.ui
