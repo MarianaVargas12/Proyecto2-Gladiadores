@@ -30,8 +30,19 @@ int main(int argc, char *argv[])
     Tablero::getInstance().generarMatriz();
     int mat[10][10] = {{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},
                        {0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0}};
-    string mensaje = serializador::getInstance().serializarTableroGladiador(mat,35,10,80,20,10,1,10001,80,60);
-    Socket::getInstance().escuchaEnvia(8080, mensaje);
+    string mensaje = serializador::getInstance().serializarTableroGladiador(mat,35,10,80,20,10,1,10001,80,60,20,30,15,1);
+    Socket *sock = &Socket::getInstance();
+    serializador *serial = &serializador::getInstance();
+    bool mod3 = false;
+
+    while (sock->play){
+        serial->DeserealizarPartida(sock->escuchaEnvia(8080, mensaje),&(sock->play),&(sock->turno),&mod3);
+        if(sock->turno % 3 ==0){
+            qDebug()<<"\nModulo 3";
+        }
+
+    }
+
 
 //    MainWindow w;
 //    w.show();

@@ -1,6 +1,8 @@
 #include "socket.h"
 #define PORT 8080
 
+int Socket::turno = 0;
+bool Socket::play = true;
 Socket::Socket()
 {
 
@@ -85,7 +87,8 @@ string Socket::escuchaEnvia(int puerto,string mensaje)
         exit(EXIT_FAILURE);
     }
     valread = read( new_socket , buffer, 1024);
+    string message = buffer;
     send(new_socket , hello , strlen(hello) , 0 );
     close(server_fd);
-    return buffer;
+    return message;
 }

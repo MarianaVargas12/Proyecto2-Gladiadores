@@ -28,6 +28,8 @@ public:
     Socket();
     void enviar(string mensaje, int puerto, string ip);
     string escuchaEnvia(int puerto, string mensaje);
+    static int turno;
+    static bool play;
 };
 
 #endif // SOCKET_H
