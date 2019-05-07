@@ -70,6 +70,21 @@ void Poblacion::seleccion(){
     cout<<"gladiador: "<<mejores[1]<<"vida: "<<mejores[1]->getVida()<<"edad: "<<mejores[1]->getEdad()<<"emocional: "<<mejores[1]->getEmocional()<<"condicion: "<<mejores[1]->getCondicion()<<"superior: "<<mejores[1]->getSuperior()<<"inferior: "<<mejores[1]->getInferior()<<"fitness: "<<mejores[1]->getFitness()<<endl;
 
 }
+
+Gladiador* Poblacion::mejor(){
+    Nodo* temp= Gladiadores->getHead();
+    Gladiador* mejor= temp->getGladiador();
+    temp=temp->getSiguiente();
+    while(temp!=nullptr){
+        if(mejor->getFitness()<temp->getGladiador()->getFitness()){
+            mejor=temp->getGladiador();
+            temp= temp->getSiguiente();
+        }else{
+            temp= temp->getSiguiente();
+        }
+    }
+    return mejor;
+}
 //variaciones aleatorias
 void Poblacion::mutacion(){
     int i=rand()%2 ;

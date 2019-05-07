@@ -17,70 +17,37 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     srand(time(0));
-   // QApplication a(argc, argv);
-   //Tablero *tablero = new Tablero();
+
     for ( int x = 0;x<10; x++) {
         Tablero::getInstance().generarTorre();
-    }/*
-    int grid[ROW][COL] =
-        {
-            { 0, 1, 1, 1, 0, 0, 0, 0, 0, 0 },
-            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-            { 1, 0, 1, 0, 0, 0, 0, 0, 0, 1 },
-            { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 },
-            { 1, 0, 1, 0, 1, 1, 1, 0, 1, 0 },
-            { 1, 0, 1, 1, 1, 1, 0, 1, 0, 0 },
-            { 0, 0, 0, 0, 0, 1, 0, 0, 0, 1 },
-            { 0, 0, 1, 1, 1, 1, 0, 1, 1, 1 },
-            { 0, 1, 1, 0, 0, 0, 1, 0, 0, 1 },
-            { 0, 1, 1, 0, 0, 0, 1, 0, 0, 1 }
-        };*/
-
-    Tablero::getInstance().imprimirMatriz();
-        // Source is the left-most bottom-most corner
-        Pair src = make_pair(0, 0);
-
-        // Destination is the left-most top-most corner
-        Pair dest = make_pair(9, 9);
-
-        aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
-
-/*
+    }
     Poblacion* poblacion1=new Poblacion();
     poblacion1->poblacionInicial(5);
-    poblacion1->seleccion();
-    poblacion1->creacion(5);
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+    Poblacion* poblacion2=new Poblacion();
+    poblacion2->poblacionInicial(5);
+    Gladiador* mejor1=poblacion1->mejor();
+    Gladiador* mejor2=poblacion1->mejor();
+    //Tablero::getInstance().imprimirMatriz();
 
-    Tablero::getInstance().generarTorre();
+    Pair src = make_pair(0, 0);
+    Pair dest = make_pair(9, 9);
+    int** path= aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
+    int** back=Tablero::getInstance().backtracking();
+     string mensaje = serializador::getInstance().serializarTableroGladiador(Tablero::getInstance().cuadriculaInt,mejor1->getEdad(),mejor2->getEdad(),mejor1->getEmocional(),mejor2->getEmocional(),mejor1->getCondicion(),mejor2->getCondicion(),mejor1->getResistencia(),mejor2->getResistencia(),mejor1->getVelocidad(),mejor2->getVelocidad(),mejor1->getGeneracion(),
+                                                                             mejor2->getGeneracion(),mejor1->getId(),mejor2->getId(),mejor1->getVida(),mejor2->getVida(),mejor1->getFitness(),mejor2->getFitness(),mejor1->getProbabilidad(),mejor2->getProbabilidad(),mejor1->getSuperior(),mejor2->getSuperior(),mejor1->getInferior(),mejor2->getInferior(),mejor1->getSupervivncia(),mejor2->getSupervivncia(),path,back);
+     Socket *sock = &Socket::getInstance();
+     serializador *serial = &serializador::getInstance();
+     bool mod3 = false;
 
-    for (Node* nodoTorre = Tablero::getInstance().listaTorres->getFirst();nodoTorre!=nullptr;nodoTorre=nodoTorre->getNext()) {
-        torre* torreA = (torre*)nodoTorre->getData();
-        torreA->moverse();
-    }
-    cout<<""<<endl;
-    Tablero::getInstance().generarMatriz();
-    int mat[10][10] = {{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},
-                       {0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0}};
-    string mensaje = serializador::getInstance().serializarTableroGladiador(mat,35,10,80,20,10,1,10001,80,60,20,30,15,1);
-    Socket *sock = &Socket::getInstance();
-    serializador *serial = &serializador::getInstance();
-    bool mod3 = false;
+//     while (sock->play){
 
-    while (sock->play){
-        serial->DeserealizarPartida(sock->escuchaEnvia(8080, mensaje),&(sock->play),&(sock->turno),&mod3);
-        if(sock->turno % 3 ==0){
-            qDebug()<<"\nModulo 3";
-        }
+//         serial->DeserealizarPartida(sock->escuchaEnvia(8080, mensaje),&(sock->play),&(sock->turno),&mod3);
+//         if(sock->turno % 3 ==0){
+//             qDebug()<<"\nModulo 3";
+//         }
 
-    }
+//     }
 
 
-//    MainWindow w;
-//    w.show();
-
-//    return a.exec();*/
 }
 

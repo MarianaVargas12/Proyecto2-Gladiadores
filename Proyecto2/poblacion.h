@@ -49,6 +49,7 @@ public:
     /// \param cantidad
     ///
     void creacion(int cantidad);
+    Gladiador* mejor();
 };
 
 #endif // POBLACION_H

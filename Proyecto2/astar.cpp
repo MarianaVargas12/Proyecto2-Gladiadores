@@ -41,12 +41,14 @@ double calculateHValue(int row, int col, Pair dest)
 {
     return ((double)sqrt ((row-dest.first)*(row-dest.first)+ (col-dest.second)*(col-dest.second)));
 }
-void tracePath(cell cellDetails[][COL], Pair dest)
+
+int** tracePath(cell cellDetails[][COL], Pair dest)
 {
     printf ("\nThe Path is ");
     int row = dest.first;
     int col = dest.second;
-    int path[100][2];
+    int** path= new int*[30];
+    //int path[100][2];
     int ruta=0;
 
     stack<Pair> Path;
@@ -64,36 +66,34 @@ void tracePath(cell cellDetails[][COL], Pair dest)
     Path.push (make_pair (row, col));
     while (!Path.empty())
     {
+        path[ruta]= new int[2];
         pair<int,int> p = Path.top();
         Path.pop();
         path[ruta][0]=p.first;
         path[ruta][1]=p.second;
-        printf("-> (%d,%d) ",p.first,p.second);
+        ruta++;
+        //printf("-> (%d,%d) ",p.first,p.second);
     }
-    Tablero::getInstance().backtracking();
-    return;
+
+    return path;
 }
-void aStarSearch(int grid[][COL], Pair src, Pair dest)
+int** aStarSearch(int grid[][COL], Pair src, Pair dest)
 {
     if (isValid (src.first, src.second) == false)
     {
         printf ("Source is invalid\n");
-        return;
     }
     if (isValid (dest.first, dest.second) == false)
     {
         printf ("Destination is invalid\n");
-        return;
     }
     if (isUnBlocked(grid, src.first, src.second) == false || isUnBlocked(grid, dest.first, dest.second) == false)
     {
         printf ("Source or the destination is blocked\n");
-        return;
     }
     if (isDestination(src.first, src.second, dest) == true)
     {
         printf ("We are already at the destination\n");
-        return;
     }
     bool closedList[ROW][COL];
     memset(closedList, false, sizeof (closedList));
@@ -137,9 +137,8 @@ void aStarSearch(int grid[][COL], Pair src, Pair dest)
                 cellDetails[i-1][j].parent_i = i;
                 cellDetails[i-1][j].parent_j = j;
                 printf ("The destination cell is found\n");
-                tracePath (cellDetails, dest);
                 foundDest = true;
-                return;
+                return tracePath (cellDetails, dest);;
             }
             else if (closedList[i-1][j] == false && isUnBlocked(grid, i-1, j) == true)
             {
@@ -164,9 +163,8 @@ void aStarSearch(int grid[][COL], Pair src, Pair dest)
                 cellDetails[i+1][j].parent_i = i;
                 cellDetails[i+1][j].parent_j = j;
                 printf("The destination cell is found\n");
-                tracePath(cellDetails, dest);
                 foundDest = true;
-                return;
+                return tracePath(cellDetails, dest);;
             }
             else if (closedList[i+1][j] == false && isUnBlocked(grid, i+1, j) == true)
             {
@@ -192,9 +190,8 @@ void aStarSearch(int grid[][COL], Pair src, Pair dest)
                 cellDetails[i][j+1].parent_i = i;
                 cellDetails[i][j+1].parent_j = j;
                 printf("The destination cell is found\n");
-                tracePath(cellDetails, dest);
                 foundDest = true;
-                return;
+                return tracePath(cellDetails, dest);;
             }
             else if (closedList[i][j+1] == false && isUnBlocked (grid, i, j+1) == true)
             {
@@ -221,9 +218,8 @@ void aStarSearch(int grid[][COL], Pair src, Pair dest)
                 cellDetails[i][j-1].parent_i = i;
                 cellDetails[i][j-1].parent_j = j;
                 printf("The destination cell is found\n");
-                tracePath(cellDetails, dest);
                 foundDest = true;
-                return;
+                return tracePath(cellDetails, dest);;
             }
             else if (closedList[i][j-1] == false && isUnBlocked(grid, i, j-1) == true)
             {
@@ -248,9 +244,8 @@ void aStarSearch(int grid[][COL], Pair src, Pair dest)
                 cellDetails[i-1][j+1].parent_i = i;
                 cellDetails[i-1][j+1].parent_j = j;
                 printf ("The destination cell is found\n");
-                tracePath (cellDetails, dest);
                 foundDest = true;
-                return;
+                return tracePath(cellDetails, dest);;
             }
             else if (closedList[i-1][j+1] == false && isUnBlocked(grid, i-1, j+1) == true)
             {
@@ -275,9 +270,8 @@ void aStarSearch(int grid[][COL], Pair src, Pair dest)
                 cellDetails[i-1][j-1].parent_i = i;
                 cellDetails[i-1][j-1].parent_j = j;
                 printf ("The destination cell is found\n");
-                tracePath (cellDetails, dest);
                 foundDest = true;
-                return;
+                return tracePath(cellDetails, dest);;
             }
             else if (closedList[i-1][j-1] == false && isUnBlocked(grid, i-1, j-1) == true)
             {
@@ -303,9 +297,8 @@ void aStarSearch(int grid[][COL], Pair src, Pair dest)
                 cellDetails[i+1][j+1].parent_i = i;
                 cellDetails[i+1][j+1].parent_j = j;
                 printf ("The destination cell is found\n");
-                tracePath (cellDetails, dest);
                 foundDest = true;
-                return;
+                return tracePath(cellDetails, dest);;
             }
             else if (closedList[i+1][j+1] == false && isUnBlocked(grid, i+1, j+1) == true)
             {
@@ -332,9 +325,8 @@ void aStarSearch(int grid[][COL], Pair src, Pair dest)
                 cellDetails[i+1][j-1].parent_i = i;
                 cellDetails[i+1][j-1].parent_j = j;
                 printf("The destination cell is found\n");
-                tracePath(cellDetails, dest);
                 foundDest = true;
-                return;
+                return tracePath(cellDetails, dest);;
             }
             else if (closedList[i+1][j-1] == false && isUnBlocked(grid, i+1, j-1) == true)
             {
@@ -355,6 +347,4 @@ void aStarSearch(int grid[][COL], Pair src, Pair dest)
     }
     if (foundDest == false)
         printf("Failed to find the Destination Cell\n");
-
-    return;
 }

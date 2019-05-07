@@ -67,15 +67,17 @@ void Tablero::imprimirMatriz()
     }
 }
 
-void Tablero::backtracking(){
+int** Tablero::backtracking(){
     int j=0;
     int i=0;
     LinkedList* listaAnteriores= new LinkedList();
     int ivisitados=0;
+    int** ruta= new int*[30];
     int iruta=0;
-    int ruta[100][2];
+    //int ruta[100][2];
     int visitados[100][2];
     while(0<=i<10 && 0<=j<10){
+        ruta[iruta]= new int[2];
         if(i-1<0 && j-1<0){
             if(Tablero::getInstance().cuadricula[i+1][j+1]->ocupado == false && visitado(i+1,j+1,ivisitados,visitados)){
                 ruta[iruta][0]= i;
@@ -194,11 +196,7 @@ void Tablero::backtracking(){
             int imp=0;
             ruta[iruta][0]= 9;
             ruta[iruta][1]= 9;
-            while(imp<=iruta){
-                qDebug()<<" X: "<<ruta[imp][0]<<" Y: "<<ruta[imp][1];
-                imp++;
-            }
-            return;
+            return ruta;
         }else if (i-1<0) {
             if(Tablero::getInstance().cuadricula[i+1][j+1]->ocupado == false && visitado(i+1,j+1,ivisitados,visitados)){
                 ruta[iruta][0]= i;

@@ -26,7 +26,7 @@ public:
     //! \brief generarMatriz imprime en consola la matriz del tablero
     //!
     void imprimirMatriz();
-    void backtracking();
+    int** backtracking();
     bool visitado(int i, int j, int max, int visitados[][2]);
     LinkedList *listaTorres = new LinkedList();
 };
