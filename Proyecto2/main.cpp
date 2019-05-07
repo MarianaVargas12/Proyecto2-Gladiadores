@@ -14,14 +14,16 @@ int main(int argc, char *argv[])
     for ( int x = 0;x<10; x++) {
         Tablero::getInstance().generarTorre();
     }
-    Tablero::getInstance().generarMatriz();
 
-    for (Node* nodoTorre = Tablero::getInstance().listaTorres->getFirst();nodoTorre!=nullptr;nodoTorre=nodoTorre->getNext()) {
-        torre* torreA = (torre*)nodoTorre->getData();
-        torreA->moverse();
-    }
-    cout<<""<<endl;
-    Tablero::getInstance().generarMatriz();
+    Tablero::getInstance().imprimirMatriz();
+
+
+//    for (Node* nodoTorre = Tablero::getInstance().listaTorres->getFirst();nodoTorre!=nullptr;nodoTorre=nodoTorre->getNext()) {
+//        torre* torreA = (torre*)nodoTorre->getData();
+//        torreA->moverse();
+//    }
+//    cout<<""<<endl;
+//    Tablero::getInstance().generarMatriz();
 
 //    MainWindow w;
 //    w.show();

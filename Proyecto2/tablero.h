@@ -13,6 +13,7 @@ public:
                return instance;
 }
     cuadro* cuadricula[10][10];
+    int cuadriculaInt[10][10];
     //!
     //! \brief Tablero construye un tablero y le asigna el x,y a cada cuadro de la matriz
     //!
@@ -24,7 +25,7 @@ public:
     //!
     //! \brief generarMatriz imprime en consola la matriz del tablero
     //!
-    void generarMatriz();
+    void imprimirMatriz();
     LinkedList *listaTorres = new LinkedList();
 };
 

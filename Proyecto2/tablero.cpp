@@ -40,22 +40,22 @@ void Tablero::generarTorre()
                 torreRandom->setY(cuadricula[xRand][yRand]->getY());
                 torreRandom->actualizarCuadrosAlcance();
                 cuadricula[xRand][yRand]->ocupado = true;
+                cuadriculaInt[xRand][yRand] = torreRandom->tipo;
                 listaTorres->Add(torreRandom);
             }
         }
     }
 }
 
-void Tablero::generarMatriz()
+void Tablero::imprimirMatriz()
 {
     for (int i = 0;i<10;i++) {
         cout<<""<<endl;
         for (int j = 0;j<10;j++) {
-            if(Tablero::getInstance().cuadricula[j][i]->ocupado == true){
-
+            if(Tablero::getInstance().cuadricula[i][j]->ocupado == true){
                 for (Node* nodoTorre = Tablero::getInstance().listaTorres->getFirst(); nodoTorre != nullptr ; nodoTorre = nodoTorre->getNext()){
                     torre* TorrePrueba = (torre*)nodoTorre->getData();
-                    if (TorrePrueba->getX() == Tablero::getInstance().cuadricula[j][i]->getX() && TorrePrueba->getY() == Tablero::getInstance().cuadricula[j][i]->getY()){
+                    if (TorrePrueba->getX() == Tablero::getInstance().cuadricula[i][j]->getX() && TorrePrueba->getY() == Tablero::getInstance().cuadricula[i][j]->getY()){
                         cout<<TorrePrueba->tipo<<",";
                     }
                 }
@@ -66,3 +66,4 @@ void Tablero::generarMatriz()
         }
     }
 }
+
