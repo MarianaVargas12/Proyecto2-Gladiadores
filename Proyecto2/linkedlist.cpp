@@ -79,7 +79,25 @@ Node* LinkedList::remove(Node* nodo){//para la lista de carros
         }
         qDebug()<<"El nodo no esta en la lista";
         return nullptr;
+}
+Node* LinkedList::removeLast(){//para la lista de carros
+    Node* temp=this->first;
+    Node* aux=this->first;
+    while (aux!=nullptr) {
+        if(aux->getNext()==nullptr){
+            this->t--;
+            delete(temp->getNext());
+            temp->setNext(nullptr);
+            cout<<"remove:  "<<*(int*)aux->getData()<<endl;
+            return aux;
+        }else{
+            temp=aux;
+            aux = aux->getNext();
+        }
     }
+    qDebug()<<"El nodo no esta en la lista";
+    return nullptr;
+}
 
 void LinkedList::Print()
 {

@@ -37,6 +37,7 @@ SOURCES += \
     lista.cpp \
     obstaculo.cpp \
     poblacion.cpp \
+    astar.cpp \
     serializador.cpp \
     linkedlist.cpp \
     socket.cpp

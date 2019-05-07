@@ -22,6 +22,7 @@ public:
     int getT() const;
     void setT(int value);
     Node* pop();
+    Node* removeLast();
 };
 
 #endif // LINKEDLIST_H

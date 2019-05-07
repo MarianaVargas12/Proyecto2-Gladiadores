@@ -18,12 +18,36 @@ private:
     int datos[9];
 
 public:
+    ///
+    /// \brief Poblacion
+    ///
     Poblacion();
+    ///
+    /// \brief crea la poblacion inicial con datos basicos
+    /// \param cantidad
+    ///
     void poblacionInicial(int cantidad);
+    ///
+    /// \brief de los mejores gladiadores escoge datos necesarios para crear los nuevos individuos
+    ///
     void cruces();
+    ///
+    /// \brief escoge los dos mejores gladiadores egun su fitness
+    ///
     void seleccion();
+    ///
+    /// \brief luego de crear gladiadores se insertan a la poblacion existente
+    /// \param nuevoGladiador
+    ///
     void insercion(Gladiador* nuevoGladiador);
+    ///
+    /// \brief con los mejores gladiadores se escoge alguno de ambos para crear nuevos
+    ///
     void mutacion();
+    ///
+    /// \brief crea los nuevos gladiadores a base de los mejores de las generaciones aneriores
+    /// \param cantidad
+    ///
     void creacion(int cantidad);
 };
 

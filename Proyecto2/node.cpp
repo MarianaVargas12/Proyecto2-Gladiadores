@@ -2,26 +2,27 @@
 
 Node *Node::getNext() const
 {
-    return next;
+    return this->next;
 }
 
 void Node::setNext(Node *value)
 {
-    next = value;
+    this->next = value;
 }
 
 void *Node::getData() const
 {
-    return data;
+    return this->data;
 }
 
 void Node::setData(void *value)
 {
-    data = value;
+    this->data = value;
 }
 
 Node::Node(void* data)
 {
+    cout<<"nodeee"<<*(int*)data<<endl;
     this->data=data;
     this->next=nullptr;
 }

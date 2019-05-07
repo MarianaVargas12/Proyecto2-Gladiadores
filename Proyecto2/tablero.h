@@ -21,10 +21,10 @@ public:
     //! \brief generarTorre crea una torre y la coloca en algun lugar aleatorio del tablero
     //!
     void generarTorre();
-    //!
-    //! \brief generarMatriz imprime en consola la matriz del tablero
-    //!
-    void generarMatriz();
+    void backtracking();
+    void pathfinding();
+    bool ruta();
+    bool visitado(int i, int j, int max, int visitados[][2]);
     LinkedList *listaTorres = new LinkedList();
 };
 
