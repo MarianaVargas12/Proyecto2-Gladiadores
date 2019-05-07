@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include"tablero.h"
 using namespace std;
 
 #define ROW 10
@@ -69,7 +70,7 @@ void tracePath(cell cellDetails[][COL], Pair dest)
         path[ruta][1]=p.second;
         printf("-> (%d,%d) ",p.first,p.second);
     }
-
+    Tablero::getInstance().backtracking();
     return;
 }
 void aStarSearch(int grid[][COL], Pair src, Pair dest)

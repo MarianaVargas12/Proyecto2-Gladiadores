@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
    //Tablero *tablero = new Tablero();
     for ( int x = 0;x<10; x++) {
         Tablero::getInstance().generarTorre();
-    }
+    }/*
     int grid[ROW][COL] =
         {
             { 0, 1, 1, 1, 0, 0, 0, 0, 0, 0 },
@@ -34,16 +34,16 @@ int main(int argc, char *argv[])
             { 0, 0, 1, 1, 1, 1, 0, 1, 1, 1 },
             { 0, 1, 1, 0, 0, 0, 1, 0, 0, 1 },
             { 0, 1, 1, 0, 0, 0, 1, 0, 0, 1 }
-        };
+        };*/
 
     Tablero::getInstance().imprimirMatriz();
         // Source is the left-most bottom-most corner
-        Pair src = make_pair(8, 0);
+        Pair src = make_pair(0, 0);
 
         // Destination is the left-most top-most corner
-        Pair dest = make_pair(0, 0);
+        Pair dest = make_pair(9, 9);
 
-        aStarSearch(grid, src, dest);
+        aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
 
 /*
     Poblacion* poblacion1=new Poblacion();

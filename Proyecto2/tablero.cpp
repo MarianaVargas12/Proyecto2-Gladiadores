@@ -190,8 +190,15 @@ void Tablero::backtracking(){
                 i=*(int*)nuevo->getData();
                 j=*((int*)nuevo->getData()+1);
             }
-        }else if (i+1>=10 && j+1>=10) {
-            //return ruta;
+        }else if (i==9 && j==9) {
+            int imp=0;
+            ruta[iruta][0]= 9;
+            ruta[iruta][1]= 9;
+            while(imp<=iruta){
+                qDebug()<<" X: "<<ruta[imp][0]<<" Y: "<<ruta[imp][1];
+                imp++;
+            }
+            return;
         }else if (i-1<0) {
             if(Tablero::getInstance().cuadricula[i+1][j+1]->ocupado == false && visitado(i+1,j+1,ivisitados,visitados)){
                 ruta[iruta][0]= i;
