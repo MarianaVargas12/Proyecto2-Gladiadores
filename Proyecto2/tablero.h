@@ -13,6 +13,7 @@ public:
                return instance;
 }
     cuadro* cuadricula[10][10];
+    int cuadriculaInt[10][10];
     //!
     //! \brief Tablero construye un tablero y le asigna el x,y a cada cuadro de la matriz
     //!
@@ -21,9 +22,11 @@ public:
     //! \brief generarTorre crea una torre y la coloca en algun lugar aleatorio del tablero
     //!
     void generarTorre();
+    //!
+    //! \brief generarMatriz imprime en consola la matriz del tablero
+    //!
+    void imprimirMatriz();
     void backtracking();
-    void pathfinding();
-    bool ruta();
     bool visitado(int i, int j, int max, int visitados[][2]);
     LinkedList *listaTorres = new LinkedList();
 };

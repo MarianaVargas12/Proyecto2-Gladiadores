@@ -16,6 +16,12 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+    srand(time(0));
+   // QApplication a(argc, argv);
+   //Tablero *tablero = new Tablero();
+    for ( int x = 0;x<10; x++) {
+        Tablero::getInstance().generarTorre();
+    }
     int grid[ROW][COL] =
         {
             { 0, 1, 1, 1, 0, 0, 0, 0, 0, 0 },
@@ -30,6 +36,7 @@ int main(int argc, char *argv[])
             { 0, 1, 1, 0, 0, 0, 1, 0, 0, 1 }
         };
 
+    Tablero::getInstance().imprimirMatriz();
         // Source is the left-most bottom-most corner
         Pair src = make_pair(8, 0);
 
