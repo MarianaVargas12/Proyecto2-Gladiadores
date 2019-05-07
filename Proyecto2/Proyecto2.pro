@@ -37,7 +37,8 @@ SOURCES += \
     lista.cpp \
     obstaculo.cpp \
     poblacion.cpp \
-    linkedlist.cpp
+    linkedlist.cpp \
+    astar.cpp
 
 HEADERS += \
         mainwindow.h \

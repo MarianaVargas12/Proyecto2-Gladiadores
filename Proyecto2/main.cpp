@@ -9,9 +9,34 @@ using namespace std;
 #include <stdlib.h>
 #include "lista.h"
 #include "poblacion.h"
+#include "astar.cpp"
+
 
 int main(int argc, char *argv[])
 {
+    int grid[ROW][COL] =
+        {
+            { 0, 1, 1, 1, 0, 0, 0, 0, 0, 0 },
+            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+            { 1, 0, 1, 0, 0, 0, 0, 0, 0, 1 },
+            { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 },
+            { 1, 0, 1, 0, 1, 1, 1, 0, 1, 0 },
+            { 1, 0, 1, 1, 1, 1, 0, 1, 0, 0 },
+            { 0, 0, 0, 0, 0, 1, 0, 0, 0, 1 },
+            { 0, 0, 1, 1, 1, 1, 0, 1, 1, 1 },
+            { 0, 1, 1, 0, 0, 0, 1, 0, 0, 1 },
+            { 0, 1, 1, 0, 0, 0, 1, 0, 0, 1 }
+        };
+
+        // Source is the left-most bottom-most corner
+        Pair src = make_pair(8, 0);
+
+        // Destination is the left-most top-most corner
+        Pair dest = make_pair(0, 0);
+
+        aStarSearch(grid, src, dest);
+
+/*
     Poblacion* poblacion1=new Poblacion();
     poblacion1->poblacionInicial(5);
     poblacion1->seleccion();
@@ -20,7 +45,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-        Tablero::getInstance().generarTorre();
+    Tablero::getInstance().generarTorre();
 
 
     for (int i = 0;i<10;i++) {
@@ -48,5 +73,6 @@ int main(int argc, char *argv[])
 //    MainWindow w;
 //    w.show();
 
-//    return a.exec();
+//    return a.exec();*/
 }
+

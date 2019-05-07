@@ -19,9 +19,21 @@ private:
     int vida;
     int fitness;
 public:
+    int xgladiador;
+    int ygladiador;
     Gladiador(int vida,int id,int edad, int emocional,int condicionfisica, int troncoSuperior, int troncoinferiro, int velocidad, int generacion);
+    ///
+    /// \brief segun el maximo fitness y el fitness del individuo
+    /// \param maximoFitness
+    ///
     void setProbabilidad(int maximaResistencia);
+    ///
+    /// \brief segun la probabilidad se da la toma de supervivencia
+    ///
     void setGeneracionesSupervivencia();
+    ///
+    /// \brief se da la resistencis usando una formula con ciertas caracteristicas
+    ///
     void setresitencia();
     int getEdad();
     int getProbabilidad();
@@ -36,6 +48,9 @@ public:
     int getId();
     int getFitness();
     int getVida();
+    ///
+    /// \brief setFitness
+    ///
     void setFitness();
 };
 
