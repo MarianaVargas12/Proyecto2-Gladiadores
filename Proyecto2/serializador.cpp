@@ -65,8 +65,11 @@ int troncoSuperior, int troncoSuperiorBack, int troncoInferior, int troncoInferi
             d["aStar"].GetArray()[j][1]=aStar[j][1];
             break;
         }
-        d["aStar"].GetArray()[j][0]=aStar[j][0];
-        d["aStar"].GetArray()[j][1]=aStar[j][1];
+        else{
+            d["aStar"].GetArray()[j][0]=aStar[j][0];
+            d["aStar"].GetArray()[j][1]=aStar[j][1];
+        }
+
     }
     for (int j=0;j<30;j++){
         if(backTrack[j][0]==9 and backTrack[j][1]==9){
@@ -74,8 +77,11 @@ int troncoSuperior, int troncoSuperiorBack, int troncoInferior, int troncoInferi
             d["backTrack"].GetArray()[j][1]=backTrack[j][1];
             break;
         }
-        d["backTrack"].GetArray()[j][0]=aStar[j][0];
-        d["backTrack"].GetArray()[j][1]=aStar[j][1];
+        else{
+            d["backTrack"].GetArray()[j][0]=backTrack[j][0];
+            d["backTrack"].GetArray()[j][1]=backTrack[j][1];
+        }
+
     }
     rapidjson::StringBuffer buffer;
     rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);

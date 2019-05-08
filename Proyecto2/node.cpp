@@ -22,7 +22,7 @@ void Node::setData(void *value)
 
 Node::Node(void* data)
 {
-    cout<<"nodeee"<<*(int*)data<<endl;
+    //cout<<"nodeee"<<*(int*)data<<endl;
     this->data=data;
     this->next=nullptr;
 }
