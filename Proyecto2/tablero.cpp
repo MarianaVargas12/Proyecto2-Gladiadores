@@ -12,10 +12,10 @@ Tablero::Tablero()
             nuevoCuadro->setX(xInicial);
             nuevoCuadro->setY(yInicial);
             cuadricula[i][j] = nuevoCuadro;
-            yInicial+=60;
+            xInicial+=60;
         }
-        yInicial = 0;
-        xInicial+= 60;
+        xInicial = 0;
+        yInicial+= 60;
 
     }
 }
@@ -64,6 +64,14 @@ void Tablero::imprimirMatriz()
                 cout<<"0"<<",";
             }
         }
+    }
+}
+
+void Tablero::moverTorres()
+{
+    for(Node* nodoTorre = listaTorres->getFirst();nodoTorre != nullptr; nodoTorre = nodoTorre->getNext()){
+        torre* torreAMover = (torre*)nodoTorre->getData();
+        torreAMover->moverse();
     }
 }
 

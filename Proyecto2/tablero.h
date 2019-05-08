@@ -26,6 +26,10 @@ public:
     //! \brief generarMatriz imprime en consola la matriz del tablero
     //!
     void imprimirMatriz();
+    //!
+    //! \brief moverTorres mueve todas las torres del tablero
+    //!
+    void moverTorres();
     LinkedList *listaTorres = new LinkedList();
 };
 
