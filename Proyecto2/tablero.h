@@ -30,6 +30,10 @@ public:
     //! \brief moverTorres mueve todas las torres del tablero
     //!
     void moverTorres();
+    //!
+    //! \brief actualizarMatricula actualiza la matriz de enteros
+    //!
+    void actualizarMatriz();
     LinkedList *listaTorres = new LinkedList();
 };
 

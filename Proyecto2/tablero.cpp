@@ -73,5 +73,25 @@ void Tablero::moverTorres()
         torre* torreAMover = (torre*)nodoTorre->getData();
         torreAMover->moverse();
     }
+    actualizarMatriz();
+}
+
+void Tablero::actualizarMatriz()
+{
+    for (int i = 0;i<10;i++) {
+        for (int j = 0;j<10;j++) {
+            if(Tablero::getInstance().cuadricula[i][j]->ocupado == true){
+                 for(Node* nodoTorre = listaTorres->getFirst();nodoTorre != nullptr; nodoTorre = nodoTorre->getNext()){
+                     torre* torreAMover = (torre*)nodoTorre->getData();
+                     if(torreAMover->getX()/60 == j && torreAMover->getY()/60 == i){
+                        Tablero::getInstance().cuadriculaInt[i][j] = torreAMover->tipo;
+                     }
+                }
+            }
+            else{
+                Tablero::getInstance().cuadriculaInt[i][j]=0;
+            }
+        }
+    }
 }
 
