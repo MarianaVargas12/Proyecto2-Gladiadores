@@ -90,6 +90,10 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
     if (isUnBlocked(grid, src.first, src.second) == false || isUnBlocked(grid, dest.first, dest.second) == false)
     {
         printf ("Source or the destination is blocked\n");
+        Tablero::getInstance().moverTorres();
+        Tablero::getInstance().imprimirMatriz();
+        aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
+
     }
     if (isDestination(src.first, src.second, dest) == true)
     {
@@ -345,6 +349,10 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
             }
         }
     }
-    if (foundDest == false)
+    if (foundDest == false){
         printf("Failed to find the Destination Cell\n");
+        Tablero::getInstance().moverTorres();
+        Tablero::getInstance().imprimirMatriz();
+        aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
+    }
 }
