@@ -28,6 +28,8 @@ int main(int argc, char *argv[])
     Gladiador* mejor1=poblacion1->mejor();
     Gladiador* mejor2=poblacion1->mejor();
     Tablero::getInstance().imprimirMatriz();
+    cout<<"\n....................."<<endl;
+    Tablero::getInstance().moverTorres();
 
     Pair src = make_pair(0, 0);
     Pair dest = make_pair(9, 9);

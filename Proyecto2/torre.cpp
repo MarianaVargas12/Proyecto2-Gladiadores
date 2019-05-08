@@ -31,8 +31,8 @@ void torre::setY(int value)
 }
 
 void torre::actualizarCuadrosAlcance(){
-    int i = this->getX() /60;  // xActual / 60;
-    int j = this->getY() /60; //yActual / 60;
+    int j = this->getX() /60;  // xActual / 60;
+    int i = this->getY() /60; //yActual / 60;
 
     if(i==9 && j == 0){//esquina derecha superior
         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j]);
@@ -83,11 +83,11 @@ void torre::actualizarCuadrosAlcance(){
         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+1][j+1]);//diagonal derecha abajo
         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+1]);//abajo
 
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-2]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j-2]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j+2]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+2]);
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-2]); //arriba
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j-2]);//diagonal derecha arriba
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j]);//derecha
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j+2]);//diagonal derecha abajo
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+2]);//abajo
         }
     }
     else if(i==9 && j >=1 && j <=8){//pegando a la derecha
@@ -98,7 +98,7 @@ void torre::actualizarCuadrosAlcance(){
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j+1]);
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+1]);
 
-            cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-2]);//izquierda
+            cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j]);//izquierda
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j+2]);//diagonal izquierda abajo
             cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+2]);//abajo
         }
@@ -333,14 +333,14 @@ void torre::actualizarCuadrosAlcance(){
         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j]);//izquierda
         cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-1][j-1]);//diagonal izquierda arriba
 
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-2]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j+2]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j-2]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+2]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j+2]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j]);
-        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j-2]);
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j-2]);//abajo
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j+2]);//diagonal derecha abajo
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j]);//derecha
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i+2][j-2]);//diagonal derecha superior
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i][j+2]);//abajo
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j+2]);//diagonal izquierda abajo
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j]);//izquierda
+        cuadrosAlcance.Add(Tablero::getInstance().cuadricula[i-2][j-2]);//diagonal izquierda superior
         }
     }
     else if(i == 0 && j == 0) {
@@ -363,53 +363,53 @@ void torre::moverse(){
     switch (movimiento) {//verifica que el campo al que se va a mover sea valido y no este ocupado
     case 1:
 
-        if(this->getY() / 60 != 0 && Tablero::getInstance().cuadricula[this->getX()/60][(this->getY()/60) - 1]->ocupado == false){
+        if(this->getY() / 60 != 0 && Tablero::getInstance().cuadricula[this->getY()/60-1][(this->getX()/60)]->ocupado == false){
             if(this->getX()/60 == 0 && this->getY()/60 == 1){
                 qDebug()<<"No se pudo mover arriba, coincidia con el punto inicial";
             }
             else{
-            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = false;
+            Tablero::getInstance().cuadricula[this->getY()/60][this->getX()/60]->ocupado = false;
             this->setY(this->getY()-60);
-            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = true;
+            Tablero::getInstance().cuadricula[this->getY()/60][this->getX()/60]->ocupado = true;
             }
         }
         break;
 
     case 2:
 
-        if((this->getX()/60) != 9 && Tablero::getInstance().cuadricula[(this->getX()/60) + 1][this->getY()/60]->ocupado == false){
+        if((this->getX()/60) != 9 && Tablero::getInstance().cuadricula[(this->getY()/60)][this->getX()/60 +1]->ocupado == false){
             if(this->getX()/60 == 8 && this->getY()/60 == 9){
                 qDebug()<<"No se pudo mover a la derecha, coincidia con el punto final";
             }
             else{
-            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = false;
+            Tablero::getInstance().cuadricula[this->getY()/60][this->getX()/60]->ocupado = false;
             this->setX(this->getX()+60);
-            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = true;
+            Tablero::getInstance().cuadricula[this->getY()/60][this->getX()/60]->ocupado = true;
             }
         }
         break;
     case 3:
 
-        if(this->getY() / 60 != 9 && Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60 + 1]->ocupado == false){
+        if(this->getY() / 60 != 9 && Tablero::getInstance().cuadricula[this->getY()/60 +1][this->getX()/60]->ocupado == false){
             if(this->getX()/60 == 9 && this->getY()/60 == 8){
                 qDebug()<<"No se pudo mover a la abajo, coincidia con el punto final";
             }
             else{
-            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = false;
+            Tablero::getInstance().cuadricula[this->getY()/60][this->getX()/60]->ocupado = false;
             this->setY(this->getY()+60);
-            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = true;
+            Tablero::getInstance().cuadricula[this->getY()/60][this->getX()/60]->ocupado = true;
             }
         }
         break;
     case 4:
-        if(this->getX() / 60 != 0 && Tablero::getInstance().cuadricula[this->getX()/60 - 1][this->getY()/60]->ocupado == false){
+        if(this->getX() / 60 != 0 && Tablero::getInstance().cuadricula[this->getY()/60][this->getX()/60 -1]->ocupado == false){
             if(this->getX()/60 == 1 && this->getY()/60 == 0){
                 qDebug()<<"No se pudo mover a la izquierda, coincidia con el punto inicial";
             }
             else{
-            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = false;
+            Tablero::getInstance().cuadricula[this->getY()/60][this->getX()/60]->ocupado = false;
             this->setX(this->getX()-60);
-            Tablero::getInstance().cuadricula[this->getX()/60][this->getY()/60]->ocupado = true;
+            Tablero::getInstance().cuadricula[this->getY()/60][this->getX()/60]->ocupado = true;
             }
         }
         break;
