@@ -74,7 +74,15 @@ int** tracePath(cell cellDetails[][COL], Pair dest)
         ruta++;
         //printf("-> (%d,%d) ",p.first,p.second);
     }
-
+    for(int i =0; i<30;i++){
+        if (path[i][0]==9 && path[i][1]==9){
+            qDebug()<<path[i][0]<<path[i][1];
+            break;
+        }
+        else{
+            qDebug()<<path[i][0]<<path[i][1]<<"-->";
+        }
+    }
     return path;
 }
 int** aStarSearch(int grid[][COL], Pair src, Pair dest)
@@ -90,9 +98,12 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
     if (isUnBlocked(grid, src.first, src.second) == false || isUnBlocked(grid, dest.first, dest.second) == false)
     {
         printf ("Source or the destination is blocked\n");
+        int** retornar= new int*[30];
+        retornar[0]= new int[2];
         Tablero::getInstance().moverTorres();
         Tablero::getInstance().imprimirMatriz();
-        aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
+        retornar[0][0]=-8;
+        return retornar;
 
     }
     if (isDestination(src.first, src.second, dest) == true)
@@ -351,8 +362,11 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
     }
     if (foundDest == false){
         printf("Failed to find the Destination Cell\n");
+        int** retornar= new int*[30];
+        retornar[0]= new int[2];
         Tablero::getInstance().moverTorres();
         Tablero::getInstance().imprimirMatriz();
-        aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
+        retornar[0][0]=-8;
+        return retornar;
     }
 }
