@@ -40,7 +40,8 @@ SOURCES += \
     astar.cpp \
     serializador.cpp \
     linkedlist.cpp \
-    socket.cpp
+    socket.cpp \
+    backtracking.cpp
 
 HEADERS += \
         mainwindow.h \
