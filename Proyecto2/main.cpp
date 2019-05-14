@@ -61,36 +61,6 @@ int main(int argc, char *argv[])
 //         }
 
 //     }*/
-    int mat[M][10] =
-    {
-        { 1, 1, 1, 1, 1, 0, 0, 1, 1, 1 },
-        { 0, 1, 1, 1, 1, 1, 0, 1, 0, 1 },
-        { 0, 0, 1, 0, 1, 1, 1, 0, 0, 1 },
-        { 1, 0, 1, 1, 1, 0, 1, 1, 0, 1 },
-        { 0, 0, 0, 1, 0, 0, 0, 1, 0, 1 },
-        { 1, 0, 1, 1, 1, 0, 0, 1, 1, 0 },
-        { 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
-        { 0, 1, 1, 1, 1, 1, 1, 1, 0, 0 },
-        { 1, 1, 1, 1, 1, 0, 0, 1, 1, 1 },
-        { 0, 0, 1, 0, 0, 1, 1, 0, 0, 1 },
-    };
-
-    // construct a matrix to keep track of visited cells
-    int visited[M][10];
-
-    // initially all cells are unvisited
-    memset(visited, 0, sizeof visited);
-
-    int min_dist = INT_MAX;
-    findShortestPath(mat, visited, 0, 0, 7, 5, min_dist, 0);
-
-    if(min_dist != INT_MAX)
-        cout << "The shortest path from source to destination "
-                "has length " << min_dist;
-    else
-        cout << "Destination can't be reached from given source";
-
-    return 0;
 
 }
 
