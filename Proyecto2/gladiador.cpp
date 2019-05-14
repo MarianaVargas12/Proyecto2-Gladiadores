@@ -36,8 +36,6 @@ void Gladiador::setresitencia(){
         this->resistencia=this->resistencia*(-1);
     }else if (this->resistencia==0) {
         this->resistencia=5;
-    }else {
-
     }
 }
 int Gladiador::getEdad(){
@@ -80,5 +78,5 @@ int Gladiador::getVida(){
     return this->vida;
 }
 void Gladiador::setFitness(){
-    this->fitness= Velocidad+condicionFisica+troncoSuperior+troncoInferior-edad;
+    this->fitness= Velocidad+condicionFisica+troncoSuperior+troncoInferior;
 }

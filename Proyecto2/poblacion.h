@@ -12,10 +12,11 @@ private:
     int estadistica;
     int poblacion;
     int generacion;
+    int fitness;
     Gladiador* seleccionado;
     Lista* Gladiadores = new Lista();
     Gladiador* mejores[2];
-    int datos[9];
+    int datos[9][8];
 
 public:
     ///
@@ -50,6 +51,9 @@ public:
     ///
     void creacion(int cantidad);
     Gladiador* mejor();
+    int* dectobin(int num);
+    int bintodec(int bin[8]);
+    void inversion();
 };
 
 #endif // POBLACION_H

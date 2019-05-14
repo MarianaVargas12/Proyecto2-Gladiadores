@@ -1,121 +1,80 @@
-/* C/C++ program to solve Rat in a Maze problem using
-   backtracking */
-#include<stdio.h>
-#include<bits/stdc++.h>
-using namespace std;
 
-// Maze size
+#include <bits/stdc++.h>
+using namespace std;
+#define M 10
 #define N 10
 
-bool solveMazeUtil(int maze[N][N], int x, int y, int sol[N][N]);
-
-/* A utility function to print solution matrix sol[N][N] */
-int** printSolution(int sol[N][N])
+// Check if it is possible to go to (x, y) from current position. The
+// function returns false if the cell has value 0 or already visited
+bool isSafe(int mat[M][N], int visited[M][N], int x, int y)
 {
-    int** path= new int*[30];
-    int ruta=0;
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N; j++){
-            if(sol[i][j]==1){
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-                //cout<<path[ruta][0]<<path[ruta][1];
-
-            }
-            printf(" %d ", sol[i][j]);
-        }
-        printf("\n");
-    }
-    return path;
-    /*for(int i =0; i<30;i++){
-        if (path[i][0]==3 && path[i][1]==3){
-            cout<<path[i][0]<<path[i][1];
-            break;
-        }
-        else{
-            cout<<path[i][0]<<path[i][1]<<"-->";
-        }
-    }*/
-}
-
-/* A utility function to check if x,y is valid index for N*N maze */
-bool isSafe(int maze[N][N], int x, int y)
-{
-    // if (x,y outside maze) return false
-    if(x >= 0 && x < N && y >= 0 && y < N && maze[x][y] == 0)
-        return true;
-
-    return false;
-}
-
-/* This function solves the Maze problem using Backtracking.  It mainly
-   uses solveMazeUtil() to solve the problem. It returns false if no
-   path is possible, otherwise return true and prints the path in the
-   form of 1s. Please note that there may be more than one solutions,
-   this function prints one of the feasible solutions.*/
-int** solveMaze(int maze[N][N])
-{
-    int sol[N][N] = { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    };
-
-    if(solveMazeUtil(maze, 0, 0, sol) == false)
-    {
-        printf("Solution doesn't exist");
-    }else {
-        int** back= printSolution(sol);
-        return back;;
-    }
-}
-
-/* A recursive utility function to solve Maze problem */
-bool solveMazeUtil(int maze[N][N], int x, int y, int sol[N][N])
-{
-    // if (x,y is goal) return true
-    if(x == N-1 && y == N-1)
-    {
-        sol[x][y] = 1;
-        return true;
-    }
-
-    // Check if maze[x][y] is valid
-    if(isSafe(maze, x, y) == true)
-    {
-        // mark x,y as part of solution path
-        sol[x][y] = 1;
-
-        /* Move forward in x direction */
-        if (solveMazeUtil(maze, x+1, y, sol) == true)
-            return true;
-
-        /* If moving in x direction doesn't give solution then
-           Move down in y direction  */
-        if (solveMazeUtil(maze, x, y+1, sol) == true)
-            return true;
-        if(solveMazeUtil(maze, x+1, y+1, sol) == true)//yooo
-            return true;
-        if(solveMazeUtil(maze, x-1, y+1, sol) == true)//yooo
-            return true;
-        if(solveMazeUtil(maze, x-1, y-1, sol) == true)//yooo
-            return true;
-        if(solveMazeUtil(maze, x+1, y-1, sol) == true)//yooo
-            return true;
-        /* If none of the above movements work then BACKTRACK:
-            unmark x,y as part of solution path */
-        sol[x][y] = 0;
+    if (mat[x][y] == 0 || visited[x][y])
         return false;
-    }
+
+    return true;
+}
+
+// if not a valid position, return false
+bool isValid(int x, int y)
+{
+    if (x < M && y < N && x >= 0 && y >= 0)
+        return true;
 
     return false;
 }
+
+// Find Shortest Possible Route in a Matrix mat from source cell (0, 0)
+// to destination cell (x, y)
+
+// min_dist is passed by reference and stores length of longest path
+// from source to destination found so far dist maintains length of
+// path from source cell to current cell (i, j)
+
+void findShortestPath(int mat[M][N], int visited[M][N], int i, int j, int x, int y, int& min_dist, int dist)
+{
+    // if destination is found, update min_dist
+    if (i == x && j == y)
+    {
+        min_dist = min(dist, min_dist);
+        return;
+    }
+
+    // set (i, j) cell as visited
+    visited[i][j] = 1;
+
+    // go to bottom cell
+    if (isValid(i + 1, j) && isSafe(mat, visited, i + 1, j))
+        findShortestPath(mat, visited, i + 1, j, x, y, min_dist, dist + 1);
+
+    // go to right cell
+    if (isValid(i, j + 1) && isSafe(mat, visited, i, j + 1))
+        findShortestPath(mat, visited, i, j + 1, x, y, min_dist, dist + 1);
+
+    // go to top cell
+    if (isValid(i - 1, j) && isSafe(mat, visited, i - 1, j))
+        findShortestPath(mat, visited, i - 1, j, x, y, min_dist, dist + 1);
+
+    // go to left cell
+    if (isValid(i, j - 1) && isSafe(mat, visited, i, j - 1))
+        findShortestPath(mat, visited, i, j - 1, x, y, min_dist, dist + 1);
+    // go to diagonal derecha abajo cell
+    if (isValid(i + 1, j+1) && isSafe(mat, visited, i + 1, j))
+        findShortestPath(mat, visited, i + 1, j, x, y, min_dist, dist + 1);
+
+    // go to diagonal derecha arriba cell
+    if (isValid(i+1, j - 1) && isSafe(mat, visited, i, j + 1))
+        findShortestPath(mat, visited, i, j + 1, x, y, min_dist, dist + 1);
+
+    // go to izquierda abajo cell
+    if (isValid(i - 1, j+1) && isSafe(mat, visited, i - 1, j))
+        findShortestPath(mat, visited, i - 1, j, x, y, min_dist, dist + 1);
+
+    // go to izquierda abajo cell
+    if (isValid(i-1, j - 1) && isSafe(mat, visited, i, j - 1))
+        findShortestPath(mat, visited, i, j - 1, x, y, min_dist, dist + 1);
+
+    // Backtrack - Remove (i, j) from visited matrix
+    visited[i][j] = 0;
+}
+
+
