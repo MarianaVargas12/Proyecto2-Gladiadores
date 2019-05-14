@@ -1,5 +1,7 @@
 #include "poblacion.h"
 #include <math.h>
+#include "iostream"
+using namespace std;
 Poblacion::Poblacion()
 {
 
@@ -29,8 +31,6 @@ int Poblacion::bintodec(int bin[8]){
 }
 
 void Poblacion::cruces(){
-    int* vida1=dectobin(mejores[0]->getVida());
-    int* vida=dectobin(mejores[1]->getVida());
     int* emocional1=dectobin(mejores[0]->getEmocional());
     int* emocional2=dectobin(mejores[1]->getEmocional());
     int* condicionFisica1=dectobin(mejores[0]->getCondicion());
@@ -42,11 +42,10 @@ void Poblacion::cruces(){
     int* velocidad1=dectobin(mejores[0]->getVelocidad());
     int* velocidad2=dectobin(mejores[1]->getVelocidad());
     int i=0;
-    int padre=0;
+    int padre;
     while (i<6) {
         padre = rand()%2;
         if(padre==0){
-            datos[0][i]=vida1[i];
             datos[1][i]=emocional1[i];
             datos[2][i]=condicionFisica1[i];
             datos[3][i]=troncoSup1[i];
@@ -54,7 +53,6 @@ void Poblacion::cruces(){
             datos[5][i]=velocidad1[i];
             i++;
         }else {
-            datos[0][i]=vida[i];
             datos[1][i]=emocional2[i];
             datos[2][i]=condicionFisica2[i];
             datos[3][i]=troncoSup2[i];
@@ -129,28 +127,30 @@ void Poblacion::mutacion(){
 
 //variaciones aleatorias
 void Poblacion::inversion(){
-    int num=rand()%8 ;
+    int num;
     int i=0;
     while(i<6){
         num=rand()%8 ;
+        qDebug()<<"Numero Inversion---->"<<num;
         datos[i][num]=1;
+        i++;
     }
 
 }
 void Poblacion::creacion(int cantidad){
     seleccion();
-    int transfromar=0;
+    int transfromar;
     cout<<"*****************NuevaGeneracion************************"<<endl;
     for (int i=0;i<cantidad;i++) {
-
-        transfromar = rand()%3;
+        int num = rand()%3;;
+        qDebug()<<"Numero Creacion --->"<<num;
+        transfromar = num;
         cruces();
         if(transfromar==0){
             mutacion();
         }else if (transfromar==1) {
             inversion();
         }
-        int vida=bintodec(datos[0]);
         //crear id y edad
         int id=123;
         int edad= 4;
@@ -160,32 +160,27 @@ void Poblacion::creacion(int cantidad){
         int inferior=bintodec(datos[4]);
         int velocidad=bintodec(datos[5]);
         int generacion=this->generacion+1;
-        Gladiador* nuevoGladiador= new Gladiador(vida,id,edad,emocional,condicion,superior,inferior,velocidad,generacion);
-        int fitness= velocidad+condicion+superior+inferior;
-        if(fitness>=this->fitness){
-            this->fitness=fitness;
-        }
-        nuevoGladiador->setProbabilidad(this->fitness);
-        cout<<"gladiador: "<<nuevoGladiador<<"vida: "<<nuevoGladiador->getVida()<<"edad: "<<nuevoGladiador->getEdad()<<"emocional: "<<nuevoGladiador->getEmocional()<<"condicion: "<<nuevoGladiador->getCondicion()<<"superior: "<<nuevoGladiador->getSuperior()<<"inferior: "<<nuevoGladiador->getInferior()<<"fitness: "<<nuevoGladiador->getFitness()<<endl;
+        Gladiador* nuevoGladiador= new Gladiador(mejores[0]->getVida(),id,edad,emocional,condicion,superior,inferior,velocidad,generacion);
+        int mejor = rand()%2;;
+        nuevoGladiador->setvida(mejores[mejor]->getVida());
         insercion(nuevoGladiador);
     }
     this->generacion=generacion+1;
 }
 void Poblacion::poblacionInicial(int cantidad){
     for (int i=0;i<cantidad;i++) {
-        int vida=(1+rand()%3);
+        int vida=2;
         //crear id
         int id=1;
-        int edad=(1+rand()%20);
-        int emocional=(1+rand()%10);
-        int condicion=(1+rand()%10);
-        int superior=(1+rand()%10);
-        int inferior=(1+rand()%10);
-        int velocidad=(1+rand()%10);
+        int edad=(rand()%20 +1);
+        int emocional=(rand()%10 +1);
+        int condicion=(rand()%10 +1);
+        int superior=(rand()%10 +1);
+        int inferior=(rand()%10 +1);
+        int velocidad=(rand()%10 +1);
         int generacion=1;
         this->generacion=1;
         Gladiador* nuevoGladiador= new Gladiador(vida,id,edad,emocional,condicion,superior,inferior,velocidad,generacion);
-        cout<<"gladiador: "<<nuevoGladiador<<"vida: "<<nuevoGladiador->getVida()<<"edad: "<<nuevoGladiador->getEdad()<<"emocional: "<<nuevoGladiador->getEmocional()<<"condicion: "<<nuevoGladiador->getCondicion()<<"superior: "<<nuevoGladiador->getSuperior()<<"inferior: "<<nuevoGladiador->getInferior()<<"fitness: "<<nuevoGladiador->getFitness()<<endl;
         insercion(nuevoGladiador);
     }
 }

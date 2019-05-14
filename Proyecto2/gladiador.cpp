@@ -13,21 +13,45 @@ Gladiador::Gladiador(int vida,int id,int edad, int emocional, int condicionfisic
     this->vida=vida;
     setresitencia();
     setFitness();
+    setProbabilidad();
 }
 
-void Gladiador::setProbabilidad(int maximoFitness){
-    this->probabilidad=fitness*maximoFitness/100;
+void Gladiador::setProbabilidad(){
+    this->probabilidad=this->fitness*100/1020;
     setGeneracionesSupervivencia();
 }
 void Gladiador::setGeneracionesSupervivencia(){
-    if(probabilidad<25){
+    if(probabilidad<35){
         this->supervivenciaGen= 1;
-    }else if (probabilidad<50) {
+    }else if (probabilidad<55) {
         this->supervivenciaGen=3;
-    }else if (probabilidad<75) {
+    }else if (probabilidad<70) {
         this->supervivenciaGen=4;
     }else {
         this->supervivenciaGen=6;
+    }
+}
+void Gladiador::setvida(int vidaAnterior){
+    if(probabilidad<10){
+        this->vida= vidaAnterior+1;
+    }else if (probabilidad<20) {
+        this->vida= vidaAnterior+2;
+    }else if (probabilidad<30) {
+        this->vida= vidaAnterior+3;
+    }else if (probabilidad<40) {
+        this->vida= vidaAnterior+4;
+    }else if (probabilidad<50) {
+        this->vida= vidaAnterior+5;
+    }else if (probabilidad<60) {
+        this->vida= vidaAnterior+6;
+    }else if (probabilidad<70) {
+        this->vida= vidaAnterior+7;
+    }else if (probabilidad<80) {
+        this->vida= vidaAnterior+8;
+    }else if (probabilidad<90) {
+        this->vida= vidaAnterior+9;
+    }else {
+        this->vida= vidaAnterior+10;
     }
 }
 void Gladiador::setresitencia(){

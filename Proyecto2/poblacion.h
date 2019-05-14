@@ -4,6 +4,7 @@
 #include "lista.h"
 #include "nodo.h"
 #include <iostream>
+#include "QDebug"
 using namespace std;
 
 class Poblacion
