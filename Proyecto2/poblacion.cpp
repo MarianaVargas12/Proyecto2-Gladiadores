@@ -136,7 +136,7 @@ void Poblacion::creacion(int cantidad){
     seleccion();
     int transfromar;
     for (int i=0;i<cantidad;i++) {
-        int num = rand()%3;;
+        int num = rand()%30;;
         transfromar = num;
         cruces();
         if(transfromar==0){
