@@ -6,7 +6,7 @@ using namespace std;
 
 // Maze size
 #define N 10
-
+int cont=0;
 bool solveMazeUtil(int maze[N][N], int x, int y, int sol[N][N]);
 
 /* A utility function to print solution matrix sol[N][N] */
@@ -75,6 +75,7 @@ int** solveMaze(int maze[N][N])
         printf("Solution doesn't exist");
     }else {
         int** back= printSolution(sol);
+
         return back;;
     }
 }
@@ -82,6 +83,7 @@ int** solveMaze(int maze[N][N])
 /* A recursive utility function to solve Maze problem */
 bool solveMazeUtil(int maze[N][N], int x, int y, int sol[N][N])
 {
+    cont+=1;
     // if (x,y is goal) return true
     if(x == N-1 && y == N-1)
     {
@@ -90,30 +92,49 @@ bool solveMazeUtil(int maze[N][N], int x, int y, int sol[N][N])
     }
 
     // Check if maze[x][y] is valid
+    cout<<"is safe"<<x<<"*****"<<y;
     if(isSafe(maze, x, y) == true)
     {
         // mark x,y as part of solution path
         sol[x][y] = 1;
 
         /* Move forward in x direction */
-        if (solveMazeUtil(maze, x+1, y, sol) == true)
-            return true;
+        cout<<"if1 "<<x+1<<y<<endl;
 
+        if (solveMazeUtil(maze, x+1, y, sol) == true && sol[x+1][y]!=2 && 0<=x+1<=9 && 0<=y<=9){
+            cout<<"if1 dentro "<<x+1<<y<<endl;
+            return true;
+        }
         /* If moving in x direction doesn't give solution then
            Move down in y direction  */
-        if (solveMazeUtil(maze, x, y+1, sol) == true)
+        cout<<"if2 dentro "<<x+1<<y+1<<endl;
+        if (solveMazeUtil(maze, x, y+1, sol) == true && sol[x][y+1]!=2 && 0<=x<=9 && 0<=y+1<=9){
+            cout<<"if2 dentro "<<x+1<<y+1<<endl;
             return true;
-        if(solveMazeUtil(maze, x+1, y+1, sol) == true)//yooo
+        }
+        cout<<"if3 dentro "<<x+1<<y+1<<endl;
+        if(solveMazeUtil(maze, x+1, y+1, sol) == true && sol[x+1][y+1]!=2 && 0<=x+1<=9 && 0<=y+1<=9){//yooo
+            cout<<"if3 dentro "<<x+1<<y<<endl;
             return true;
-        if(solveMazeUtil(maze, x-1, y+1, sol) == true)//yooo
+        }
+        cout<<"if4 dentro "<<x+1<<y<<endl;
+        if(solveMazeUtil(maze, x-1, y+1, sol) == true && sol[x-1][y+1]!=2 && 0<=x-1<=9 && 0<=y+1<=9){//yooo
+            cout<<"if4 dentro "<<x+1<<y<<endl;
             return true;
-        if(solveMazeUtil(maze, x-1, y-1, sol) == true)//yooo
+        }
+        cout<<"if5  "<<x-1<<y-1<<endl;
+        if(solveMazeUtil(maze, x-1, y-1, sol) == true && sol[x-1][y-1]!=2 && 0<=x-1<=9 && 0<=y-1<=9){//yooo
+            cout<<"if5 dentro "<<x-1<<y-1<<endl;
             return true;
-        if(solveMazeUtil(maze, x+1, y-1, sol) == true)//yooo
+        }
+        cout<<"if6  "<<x+1<<y-1<<endl;
+        if(solveMazeUtil(maze, x+1, y-1, sol) == true && sol[x+1][y-1]!=2 && 0<=x+1<=9 && 0<=y-1<=9){//yooo
+            cout<<"if6  dentro"<<x+1<<y-1<<endl;
             return true;
+        }
         /* If none of the above movements work then BACKTRACK:
             unmark x,y as part of solution path */
-        sol[x][y] = 0;
+        sol[x][y] = 2;
         return false;
     }
 

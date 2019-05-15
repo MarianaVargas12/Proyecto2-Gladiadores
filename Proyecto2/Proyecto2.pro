@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -41,7 +41,8 @@ SOURCES += \
     serializador.cpp \
     linkedlist.cpp \
     socket.cpp \
-    backtracking.cpp
+    backtracking.cpp \
+    arduino.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -57,7 +58,8 @@ HEADERS += \
     node.h \
     serializador.h \
     linkedlist.h \
-    socket.h
+    socket.h \
+    arduino.h
 
 FORMS += \
         mainwindow.ui

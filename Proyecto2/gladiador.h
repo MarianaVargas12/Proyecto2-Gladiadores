@@ -1,5 +1,6 @@
 #ifndef GLADIADOR_H
 #define GLADIADOR_H
+#include <iostream>
 
 
 class Gladiador
@@ -19,6 +20,7 @@ private:
     int vida;
     int fitness;
 public:
+    std::string atributos[10];
     int xgladiador;
     int ygladiador;
     Gladiador(int vida,int id,int edad, int emocional,int condicionfisica, int troncoSuperior, int troncoinferiro, int velocidad, int generacion);
