@@ -49,9 +49,9 @@ void Tablero::generarTorre()
 
 void Tablero::imprimirMatriz()
 {
-    for (int i = 0;i<10;i++) {
+    for (int j = 0;j<10;j++) {
         cout<<""<<endl;
-        for (int j = 0;j<10;j++) {
+        for (int i = 0;i<10;i++) {
             if(Tablero::getInstance().cuadricula[i][j]->ocupado == true){
                 for (Node* nodoTorre = Tablero::getInstance().listaTorres->getFirst(); nodoTorre != nullptr ; nodoTorre = nodoTorre->getNext()){
                     torre* TorrePrueba = (torre*)nodoTorre->getData();

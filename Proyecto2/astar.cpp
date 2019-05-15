@@ -87,6 +87,8 @@ int** tracePath(cell cellDetails[][COL], Pair dest)
 }
 int** aStarSearch(int grid[][COL], Pair src, Pair dest)
 {
+    cout<<"*********a star**********"<<endl;
+    Tablero::getInstance().imprimirMatriz();
     if (isValid (src.first, src.second) == false)
     {
         printf ("Source is invalid\n");
@@ -133,17 +135,24 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
     set<pPair> openList;
     openList.insert(make_pair (0.0, make_pair (i, j)));
     bool foundDest = false;
-
+    int n;
+    int x;
+    int y;
+    int L;
     while (!openList.empty())
     {
         pPair p = *openList.begin();
         openList.erase(openList.begin());
         i = p.second.first;
         j = p.second.second;
+        n= grid[i][j];
         closedList[i][j] = true;
         double gNew, hNew, fNew;
         if (isValid(i-1, j) == true)
         {
+            x=i-1;
+            y=j;
+            n= grid[i-1][j];
             if (isDestination(i-1, j, dest) == true)
             {
                 cellDetails[i-1][j].parent_i = i;
@@ -170,6 +179,10 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
         }
         if (isValid(i+1, j) == true)
         {
+            x=i+1;
+            y=j;
+            L= Tablero::getInstance().cuadriculaInt[i+1][j];
+            n= grid[j][i+1];
             if (isDestination(i+1, j, dest) == true)
             {
                 cellDetails[i+1][j].parent_i = i;
@@ -183,8 +196,7 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
                 gNew = cellDetails[i][j].g + 1.0;
                 hNew = calculateHValue(i+1, j, dest);
                 fNew = gNew + hNew;
-                if (cellDetails[i+1][j].f == FLT_MAX ||
-                        cellDetails[i+1][j].f > fNew)
+                if (cellDetails[i+1][j].f == FLT_MAX || cellDetails[i+1][j].f > fNew)
                 {
                     openList.insert( make_pair (fNew, make_pair (i+1, j)));
                     cellDetails[i+1][j].f = fNew;
@@ -197,6 +209,9 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
         }
         if (isValid (i, j+1) == true)
         {
+            y=j+1;
+            n= grid[i][j+1];
+            y=j+1;
             if (isDestination(i, j+1, dest) == true)
             {
                 cellDetails[i][j+1].parent_i = i;
@@ -225,6 +240,9 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
         }
         if (isValid(i, j-1) == true)
         {
+            x=i;
+            y=j-1;
+            n= grid[i][j-1];
             if (isDestination(i, j-1, dest) == true)
             {
                 cellDetails[i][j-1].parent_i = i;
@@ -251,6 +269,9 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
         }
         if (isValid(i-1, j+1) == true)
         {
+            x=i-1;
+            y=j+1;
+            n= grid[i-1][j+1];
             if (isDestination(i-1, j+1, dest) == true)
             {
                 cellDetails[i-1][j+1].parent_i = i;
@@ -277,6 +298,9 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
         }
         if (isValid (i-1, j-1) == true)
         {
+            x=i-1;
+            y=j-1;
+            n= grid[i-1][j-1];
             if (isDestination (i-1, j-1, dest) == true)
             {
                 cellDetails[i-1][j-1].parent_i = i;
@@ -304,6 +328,9 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
         }
         if (isValid(i+1, j+1) == true)
         {
+            x=i+1;
+            y=j+1;
+            n= grid[i+1][j+1];
             if (isDestination(i+1, j+1, dest) == true)
             {
                 cellDetails[i+1][j+1].parent_i = i;
@@ -332,6 +359,9 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
         }
         if (isValid (i+1, j-1) == true)
         {
+            x=i+1;
+            y=j-1;
+            n= grid[i+1][j-1];
             if (isDestination(i+1, j-1, dest) == true)
             {
                 cellDetails[i+1][j-1].parent_i = i;
