@@ -1,4 +1,5 @@
 #include "gladiador.h"
+#include <iostream>
 
 Gladiador::Gladiador(int vida,int id,int edad, int emocional, int condicionfisica, int troncoSuperior, int troncoinferiro, int velocidad, int generacion)
 {
@@ -13,6 +14,10 @@ Gladiador::Gladiador(int vida,int id,int edad, int emocional, int condicionfisic
     this->vida=vida;
     setresitencia();
     setFitness();
+    this->atributos[0] = std::to_string(vida);
+    this->atributos[1] = std::to_string(id);
+    this->atributos[2] = std::to_string(generacion);
+    //this->atributos[3] = std::to_string(velocidad);
 }
 
 void Gladiador::setProbabilidad(int maximoFitness){
@@ -81,4 +86,5 @@ int Gladiador::getVida(){
 }
 void Gladiador::setFitness(){
     this->fitness= Velocidad+condicionFisica+troncoSuperior+troncoInferior-edad;
+    this->atributos[3] = std::to_string(fitness);
 }

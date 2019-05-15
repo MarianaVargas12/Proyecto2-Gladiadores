@@ -1,0 +1,20 @@
+
+*.o
+
+build-Proyecto2-Desktop_Qt_5_13_0_GCC_64bit-Debug/Proyecto2
+
+build-Proyecto2-Desktop_Qt_5_13_0_GCC_64bit-Debug/
+
+Proyecto2/Proyecto2\.pro\.user
+
+<<<<<<< HEAD
+Proyecto2/Proyecto2\.pro\.user
+
+*.user
+
+Proyecto2/Proyecto2\.pro\.user\.a9099bf
+=======
+Proyecto2/main\.cpp\.autosave
+>>>>>>> tablero
+
+Proyecto2/Proyecto2\.pro\.user\.091b98f

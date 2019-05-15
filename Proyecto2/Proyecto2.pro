@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,12 +27,22 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    nodo.cpp \
     tablero.cpp \
+    gladiador.cpp \
+    cuadro.cpp \
+    torre.cpp \
+    flecha.cpp \
+    node.cpp \
+    nodo.cpp \
     lista.cpp \
     obstaculo.cpp \
-    gladiador.cpp \
-    poblacion.cpp
+    poblacion.cpp \
+    astar.cpp \
+    serializador.cpp \
+    linkedlist.cpp \
+    socket.cpp \
+    backtracking.cpp \
+    arduino.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,8 +50,16 @@ HEADERS += \
     tablero.h \
     lista.h \
     obstaculo.h \
+    poblacion.h \
     gladiador.h \
-    poblacion.h
+    cuadro.h \
+    torre.h \
+    flecha.h \
+    node.h \
+    serializador.h \
+    linkedlist.h \
+    socket.h \
+    arduino.h
 
 FORMS += \
         mainwindow.ui
