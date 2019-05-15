@@ -24,6 +24,7 @@ public:
     }
     void DeserealizarPartida(string json, bool *play, int *turno, bool *mod3);
     string serializarTableroGladiador(int matrix[10][10], int edad, int edadBack, int emocional, int emocionalBack, int condicionFisica, int condicionFisicaBack, int resistencia, int resistenciaBack, int velocidad, int velocidadBack, int generacion, int generacionBack, int id, int idBack, int vida, int vidaBack, int fitness, int fitnessBack, int probabilidad, int ptobabilidadBack, int troncoSuperior, int troncoSuperiorBack, int troncoInferior, int troncoInferiorBack, int supervivenciaGen, int supervivenciaGenBack, int** aStar, int** backTrack);
+    string serializarIteracion3(int matrix[10][10],int** aStar, int** backTrack);
 };
 
 #endif // SERIALIZADOR_H

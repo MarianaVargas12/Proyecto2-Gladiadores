@@ -145,7 +145,7 @@ void Poblacion::creacion(int cantidad){
             inversion();
         }
         //crear id y edad
-        int id=123;
+        int id=rand()%3000;;
         int edad= 4;
         int emocional=bintodec(datos[1]);
         int condicion=bintodec(datos[2]);
@@ -164,15 +164,15 @@ void Poblacion::poblacionInicial(int cantidad){
     for (int i=0;i<cantidad;i++) {
         int vida=2;
         //crear id
-        int id=1;
+        int id=rand()%3000;;
         int edad=(rand()%20 +1);
         int emocional=(rand()%10 +1);
         int condicion=(rand()%10 +1);
         int superior=(rand()%10 +1);
         int inferior=(rand()%10 +1);
         int velocidad=(rand()%10 +1);
-        int generacion=1;
-        this->generacion=1;
+        int generacion=0;
+        this->generacion=0;
         Gladiador* nuevoGladiador= new Gladiador(vida,id,edad,emocional,condicion,superior,inferior,velocidad,generacion);
         insercion(nuevoGladiador);
     }

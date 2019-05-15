@@ -4,7 +4,48 @@ serializador::serializador()
 {
 
 }
+string serializador::serializarIteracion3(int matrix[10][10], int** aStar, int** backTrack){
+    const char* json ="\"aStar\":[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],"
+                      "\"backTrack\":[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],"
+                       "\"matrix\":[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]}";
+    Document d;
+    d.Parse(json);
+    for (int j=0;j<10;j++){
+        for(int i=0; i<10;i++){
+        d["matrix"].GetArray()[j][i]=matrix[j][i];
+        }
+    }
+    for (int j=0;j<30;j++){
+        if(aStar[j][0]==9 and aStar[j][1]==9){
+            d["aStar"].GetArray()[j][0]=aStar[j][0];
+            d["aStar"].GetArray()[j][1]=aStar[j][1];
+            break;
+        }
+        else{
+            d["aStar"].GetArray()[j][0]=aStar[j][0];
+            d["aStar"].GetArray()[j][1]=aStar[j][1];
+        }
 
+    }
+    for (int j=0;j<30;j++){
+        if(backTrack[j][0]==9 and backTrack[j][1]==9){
+            d["backTrack"].GetArray()[j][0]=backTrack[j][0];
+            d["backTrack"].GetArray()[j][1]=backTrack[j][1];
+            break;
+        }
+        else{
+            d["backTrack"].GetArray()[j][0]=backTrack[j][0];
+            d["backTrack"].GetArray()[j][1]=backTrack[j][1];
+        }
+
+    }
+    rapidjson::StringBuffer buffer;
+    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+    d.Accept(writer);
+    qDebug()<<buffer.GetString();
+    return buffer.GetString();
+
+}
 string serializador::serializarTableroGladiador(int matrix[10][10], int edad, int edadBack, int emocional, int emocionalBack,
 int condicionFisica,int condicionFisicaBack, int resistencia, int resistenciaBack, int velocidad, int velocidadBack, int generacion, int generacionBack, int id, int idBack, int vida, int vidaBack, int fitness, int fitnessBack, int probabilidad, int probabilidadBack,
 int troncoSuperior, int troncoSuperiorBack, int troncoInferior, int troncoInferiorBack, int supervivenciaGen, int supervivenciaGenBack, int** aStar, int** backTrack)

@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     srand(time(0));
 
-    for ( int x = 0;x<1; x++) {
+    for ( int x = 0;x<50; x++) {
         Tablero::getInstance().generarTorre();
     }
     Poblacion* poblacion1=new Poblacion();
@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
     Gladiador* mejor1=poblacion1->mejor();
     Gladiador* mejor2=poblacion2->mejor();
     Tablero::getInstance().imprimirMatriz();
+    bool flag = true;
     cout<<"\n....................."<<endl;
     //Tablero::getInstance().moverTorres();
 
@@ -75,10 +76,14 @@ int main(int argc, char *argv[])
 //     arduino::getInstance().escribir(aLcd);
 
      while (sock->play){
-        poblacion1->creacion(4);
-        poblacion2->creacion(4);
-        Gladiador* mejor1=poblacion1->mejor();
-        Gladiador* mejor2=poblacion2->mejor();
+         qDebug()<<"CAMBIO";
+         poblacion1->creacion(4);
+         poblacion2->creacion(4);
+         Gladiador* mejor1=poblacion1->mejor();
+         Gladiador* mejor2=poblacion2->mejor();
+         Tablero::getInstance().generarTorre();
+         int** path= aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
+         int** back= solveMaze(Tablero::getInstance().cuadriculaInt);
          for (int i = 0; i<4 ; i++){
              aLcd += atributos[i];
              aLcd += mejor1->atributos[i];
@@ -98,10 +103,19 @@ int main(int argc, char *argv[])
           string recibido = sock->escuchaEnvia(8080, mensaje);
           qDebug()<<recibido.c_str();
           serial->DeserealizarPartida(recibido,&(sock->play),&(sock->turno),&mod3);
+          if (sock->turno != 0 && sock->turno%3 == 0){
+              qDebug()<<"ITERACION 3";
+              Tablero::getInstance().moverTorres();
+              int** path= aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
+              int** back= solveMaze(Tablero::getInstance().cuadriculaInt);
+              string mensaje = serial->serializarIteracion3(Tablero::getInstance().cuadriculaInt, path, back);
+              string recibido = sock->escuchaEnvia(8080, mensaje);
+
+          }
           aLcd ="";
 
      }
-     arduino::getInstance().escribir(" FIN DEL JUEGO");
+     arduino::getInstance().escribir("  FIN DEL JUEGO * FIN DEL JUEGO");
      return a.exec();
     //return 0;
 }
