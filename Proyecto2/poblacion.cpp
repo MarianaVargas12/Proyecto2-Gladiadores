@@ -87,10 +87,6 @@ void Poblacion::seleccion(){
             temp= temp->getSiguiente();
         }
     }
-    cout<<"*************mejores***********************"<<endl;
-    cout<<"gladiador: "<<mejores[0]<<"vida: "<<mejores[0]->getVida()<<"edad: "<<mejores[0]->getEdad()<<"emocional: "<<mejores[0]->getEmocional()<<"condicion: "<<mejores[0]->getCondicion()<<"superior: "<<mejores[0]->getSuperior()<<"inferior: "<<mejores[0]->getInferior()<<"fitness: "<<mejores[0]->getFitness()<<endl;
-    cout<<"gladiador: "<<mejores[1]<<"vida: "<<mejores[1]->getVida()<<"edad: "<<mejores[1]->getEdad()<<"emocional: "<<mejores[1]->getEmocional()<<"condicion: "<<mejores[1]->getCondicion()<<"superior: "<<mejores[1]->getSuperior()<<"inferior: "<<mejores[1]->getInferior()<<"fitness: "<<mejores[1]->getFitness()<<endl;
-
 }
 
 Gladiador* Poblacion::mejor(){
@@ -131,7 +127,6 @@ void Poblacion::inversion(){
     int i=0;
     while(i<6){
         num=rand()%8 ;
-        qDebug()<<"Numero Inversion---->"<<num;
         datos[i][num]=1;
         i++;
     }
@@ -140,10 +135,8 @@ void Poblacion::inversion(){
 void Poblacion::creacion(int cantidad){
     seleccion();
     int transfromar;
-    cout<<"*****************NuevaGeneracion************************"<<endl;
     for (int i=0;i<cantidad;i++) {
         int num = rand()%3;;
-        qDebug()<<"Numero Creacion --->"<<num;
         transfromar = num;
         cruces();
         if(transfromar==0){
