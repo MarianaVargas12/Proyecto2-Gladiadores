@@ -28,11 +28,9 @@ int main(int argc, char *argv[])
     poblacion1->poblacionInicial(5);
     Poblacion* poblacion2=new Poblacion();
     poblacion2->poblacionInicial(5);
-    poblacion1->creacion(5);
-    poblacion2->creacion(5);
     Gladiador* mejor1=poblacion1->mejor();
     Gladiador* mejor2=poblacion2->mejor();
-
+    Tablero::getInstance().imprimirMatriz();
     cout<<"\n....................."<<endl;
     //Tablero::getInstance().moverTorres();
 
@@ -77,7 +75,10 @@ int main(int argc, char *argv[])
 //     arduino::getInstance().escribir(aLcd);
 
      while (sock->play){
-
+        poblacion1->creacion(4);
+        poblacion2->creacion(4);
+        Gladiador* mejor1=poblacion1->mejor();
+        Gladiador* mejor2=poblacion2->mejor();
          for (int i = 0; i<4 ; i++){
              aLcd += atributos[i];
              aLcd += mejor1->atributos[i];
@@ -88,7 +89,7 @@ int main(int argc, char *argv[])
              aLcd += mejor2->atributos[i];
          }
          string mensaje = serial->serializarTableroGladiador(Tablero::getInstance().cuadriculaInt,mejor1->getEdad(),mejor2->getEdad(),mejor1->getEmocional(),mejor2->getEmocional(),mejor1->getCondicion(),mejor2->getCondicion(),mejor1->getResistencia(),mejor2->getResistencia(),mejor1->getVelocidad(),mejor2->getVelocidad(),mejor1->getGeneracion(),
-                                                                                  mejor2->getGeneracion(),mejor1->getId(),mejor2->getId(),2,mejor2->getVida(),mejor1->getFitness(),mejor2->getFitness(),mejor1->getProbabilidad(),mejor2->getProbabilidad(),mejor1->getSuperior(),mejor2->getSuperior(),mejor1->getInferior(),mejor2->getInferior(),mejor1->getSupervivncia(),mejor2->getSupervivncia(),path,back);
+                                                                                  mejor2->getGeneracion(),mejor1->getId(),mejor2->getId(),mejor2->getVida(),mejor2->getVida(),mejor1->getFitness(),mejor2->getFitness(),mejor1->getProbabilidad(),mejor2->getProbabilidad(),mejor1->getSuperior(),mejor2->getSuperior(),mejor1->getInferior(),mejor2->getInferior(),mejor1->getSupervivncia(),mejor2->getSupervivncia(),path,back);
          qDebug()<<"PASA";
          arduino::getInstance().escribir(aLcd);
          qApp->processEvents();
