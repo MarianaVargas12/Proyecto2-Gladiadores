@@ -28,7 +28,7 @@ public:
     /// \brief segun el maximo fitness y el fitness del individuo
     /// \param maximoFitness
     ///
-    void setProbabilidad();
+    void setProbabilidad(int maximaResistencia);
     ///
     /// \brief segun la probabilidad se da la toma de supervivencia
     ///
@@ -50,7 +50,6 @@ public:
     int getId();
     int getFitness();
     int getVida();
-    void setvida(int vidaAnterior);
     ///
     /// \brief setFitness
     ///

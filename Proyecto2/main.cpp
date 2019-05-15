@@ -28,11 +28,9 @@ int main(int argc, char *argv[])
     poblacion1->poblacionInicial(5);
     Poblacion* poblacion2=new Poblacion();
     poblacion2->poblacionInicial(5);
-    poblacion1->creacion(5);
-    poblacion2->creacion(5);
     Gladiador* mejor1=poblacion1->mejor();
-    Gladiador* mejor2=poblacion2->mejor();
-
+    Gladiador* mejor2=poblacion1->mejor();
+    Tablero::getInstance().imprimirMatriz();
     cout<<"\n....................."<<endl;
     //Tablero::getInstance().moverTorres();
 
@@ -104,3 +102,4 @@ int main(int argc, char *argv[])
      return a.exec();
     //return 0;
 }
+

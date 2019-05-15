@@ -1,358 +1,56 @@
-/*C/C++ program to solve Rat in a Maze problem using
+/* C/C++ program to solve Rat in a Maze problem using
    backtracking */
 #include<stdio.h>
 #include<bits/stdc++.h>
 using namespace std;
+
 // Maze size
 #define N 10
+int cont=0;
 bool solveMazeUtil(int maze[N][N], int x, int y, int sol[N][N]);
-/* A utility function to print solution matrix sol[N][N] */
 
+/* A utility function to print solution matrix sol[N][N] */
 int** printSolution(int sol[N][N])
 {
     int** path= new int*[30];
     int ruta=0;
-    int j=0;
-    int i =0;
-    path[ruta]= new int[2];
-    path[ruta][0]=0;
-    path[ruta][1]=0;
-    ruta++;
-    while(i<N && j<N){
-        if(i==9 && j==9){
-            return path;
-        }else if (i==0 && j==0 ) {
-            if(sol[i+1][j]==1){
-                sol[i+1][j]=7;
-                i=i+1;
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++){
+            if(sol[i][j]==1){
                 path[ruta]= new int[2];
                 path[ruta][0]=j;
                 path[ruta][1]=i;
                 ruta++;
-            }
-            else if(sol[i+1][j+1]==1){
-                sol[i+1][j+1]=7;
-                i=i+1;
-                j=j+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i][j+1]==1){
-                sol[i][j+1]=7;
-                j=j+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-        }else if (i==9 && j==0) {
-            if(sol[i-1][j]==1){
-                sol[i-1][j]=7;
-                i=i-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i-1][j+1]==1){
-                sol[i-1][j+1]=7;
-                i=i-1;
-                j=j+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i][j+1]==1){
-                sol[i][j+1]=7;
-                j=j+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-        }else if (i==0 && j==9) {
-            if(sol[i+1][j]==1){
-                sol[i+1][j]=7;
-                i=i+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i+1][j-1]==1){
-                sol[i+1][j-1]=7;
-                i=i+1;
-                j=j-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i][j-1]==1){
-                sol[i][j-1]=7;
-                j=j-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-        }else if (i==0) {
-            if(sol[i+1][j]==1){
-                sol[i+1][j]=7;
-                i=i+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i+1][j+1]==1){
-                sol[i+1][j+1]=7;
-                i=i+1;
-                j=j+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i][j+1]==1){
-                sol[i][j+1]=7;
-                j=j+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i+1][j-1]==1){
-                sol[i+1][j-1]=7;
-                i=i+1;
-                j=j-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i][j-1]==1){
-                sol[i][j-1]=7;
-                j=j-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-        }else if (j==0) {
-            if(sol[i+1][j]==1){
-                sol[i+1][j]=7;
-                i=i+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i+1][j+1]==1){
-                sol[i+1][j+1]=7;
-                i=i+1;
-                j=j+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i][j+1]==1){
-                sol[i][j+1]=7;
-                j=j+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i-1][j+1]==1){
-                sol[i-1][j+1]=7;
-                i=i-1;
-                j=j+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i-1][j]==1){
-                sol[i-1][j]=7;
-                i=i-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-        }else if (i==9) {
-            if(sol[i][j+1]==1){
-                sol[i][j+1]=7;
-                j=j+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i-1][j+1]==1){
-                sol[i-1][j+1]=7;
-                i=i-1;
-                j=j+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i-1][j]==1){
-                sol[i-1][j]=7;
-                i=i-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i-1][j-1]==1){
-                sol[i-1][j-1]=7;
-                i=i-1;
-                j=j-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i][j-1]==1){
-                sol[i][j-1]=7;
-                j=j-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-        }else if (j==9) {
-            if(sol[i+1][j]==1){
-                sol[i+1][j]=7;
-                i=i+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i+1][j-1]==1){
-                sol[i+1][j-1]=7;
-                i=i+1;
-                j=j-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i][j-1]==1){
-                sol[i][j-1]=7;
-                j=j-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i-1][j-1]==1){
-                sol[i-1][j-1]=7;
-                i=i-1;
-                j=j-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i-1][j]==1){
-                sol[i-1][j]=7;
-                i=i-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
+                //cout<<path[ruta][0]<<path[ruta][1];
 
-        }else{
-            if(sol[i+1][j]==1){
-                sol[i+1][j]=7;
-                i=i+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
             }
-            else if(sol[i+1][j+1]==1){
-                sol[i+1][j+1]=7;
-                i=i+1;
-                j=j+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i][j+1]==1){
-                sol[i][j+1]=7;
-                j=j+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i+1][j-1]==1){
-                sol[i+1][j-1]=7;
-                i=i+1;
-                j=j-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i][j-1]==1){
-                sol[i][j-1]=7;
-                j=j-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i-1][j-1]==1){
-                sol[i-1][j-1]=7;
-                i=i-1;
-                j=j-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i-1][j]==1){
-                sol[i-1][j]=7;
-                i=i-1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
-            else if(sol[i-1][j+1]==1){
-                sol[i-1][j+1]=7;
-                i=i-1;
-                j=j+1;
-                path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
-                ruta++;
-            }
+            printf(" %d ", sol[i][j]);
         }
+        printf("\n");
     }
     return path;
+    /*for(int i =0; i<30;i++){
+        if (path[i][0]==3 && path[i][1]==3){
+            cout<<path[i][0]<<path[i][1];
+            break;
+        }
+        else{
+            cout<<path[i][0]<<path[i][1]<<"-->";
+        }
+    }*/
 }
+
 /* A utility function to check if x,y is valid index for N*N maze */
 bool isSafe(int maze[N][N], int x, int y)
 {
     // if (x,y outside maze) return false
     if(x >= 0 && x < N && y >= 0 && y < N && maze[x][y] == 0)
         return true;
+
     return false;
 }
+
 /* This function solves the Maze problem using Backtracking.  It mainly
    uses solveMazeUtil() to solve the problem. It returns false if no
    path is possible, otherwise return true and prints the path in the
@@ -371,6 +69,7 @@ int** solveMaze(int maze[N][N])
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     };
+
     if(solveMazeUtil(maze, 0, 0, sol) == false)
     {
         printf("Solution doesn't exist");
@@ -380,6 +79,7 @@ int** solveMaze(int maze[N][N])
         return back;;
     }
 }
+
 /* A recursive utility function to solve Maze problem */
 bool solveMazeUtil(int maze[N][N], int x, int y, int sol[N][N])
 {
@@ -390,17 +90,21 @@ bool solveMazeUtil(int maze[N][N], int x, int y, int sol[N][N])
         sol[x][y] = 1;
         return true;
     }
+
     // Check if maze[x][y] is valid
-    if(isSafe(maze, x, y) == true && sol[x][y] != 5 && sol[x][y] != 1)
+    cout<<"is safe"<<x<<"*****"<<y;
+    if(isSafe(maze, x, y) == true)
     {
         // mark x,y as part of solution path
         sol[x][y] = 1;
+
         /* Move forward in x direction */
         cout<<"if1 "<<x+1<<y<<endl;
 
         if (solveMazeUtil(maze, x+1, y, sol) == true && sol[x+1][y]!=2 && 0<=x+1<=9 && 0<=y<=9){
             cout<<"if1 dentro "<<x+1<<y<<endl;
             return true;
+        }
         /* If moving in x direction doesn't give solution then
            Move down in y direction  */
         cout<<"if2 dentro "<<x+1<<y+1<<endl;
@@ -427,10 +131,12 @@ bool solveMazeUtil(int maze[N][N], int x, int y, int sol[N][N])
         if(solveMazeUtil(maze, x+1, y-1, sol) == true && sol[x+1][y-1]!=2 && 0<=x+1<=9 && 0<=y-1<=9){//yooo
             cout<<"if6  dentro"<<x+1<<y-1<<endl;
             return true;
-         sol[x][y] = 5;
-         return false;
+        }
         /* If none of the above movements work then BACKTRACK:
             unmark x,y as part of solution path */
+        sol[x][y] = 2;
+        return false;
     }
+
     return false;
 }
