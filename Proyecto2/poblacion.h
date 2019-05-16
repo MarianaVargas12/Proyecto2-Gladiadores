@@ -18,6 +18,7 @@ private:
     Lista* Gladiadores = new Lista();
     Gladiador* mejores[2];
     int datos[9][8];
+    string grafico = "";
 
 public:
     ///
@@ -55,6 +56,8 @@ public:
     int* dectobin(int num);
     int bintodec(int bin[8]);
     void inversion();
+    void Grafico();
+    string getGrafico();
 };
 
 #endif // POBLACION_H
