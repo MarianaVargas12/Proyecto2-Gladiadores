@@ -76,43 +76,48 @@ int main(int argc, char *argv[])
 //     arduino::getInstance().escribir(aLcd);
 
      while (sock->play){
-         qDebug()<<"CAMBIO";
-         poblacion1->creacion(4);
-         poblacion2->creacion(4);
-         Gladiador* mejor1=poblacion1->mejor();
-         Gladiador* mejor2=poblacion2->mejor();
-         Tablero::getInstance().generarTorre();
-         int** path= aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
-         int** back= solveMaze(Tablero::getInstance().cuadriculaInt);
-         for (int i = 0; i<4 ; i++){
-             aLcd += atributos[i];
-             aLcd += mejor1->atributos[i];
-         }
-         aLcd += "*";
-         for (int i = 0; i<4 ; i++){
-             aLcd += atributos[i];
-             aLcd += mejor2->atributos[i];
-         }
-         string mensaje = serial->serializarTableroGladiador(Tablero::getInstance().cuadriculaInt,mejor1->getEdad(),mejor2->getEdad(),mejor1->getEmocional(),mejor2->getEmocional(),mejor1->getCondicion(),mejor2->getCondicion(),mejor1->getResistencia(),mejor2->getResistencia(),mejor1->getVelocidad(),mejor2->getVelocidad(),mejor1->getGeneracion(),
-                                                                                  mejor2->getGeneracion(),mejor1->getId(),mejor2->getId(),mejor2->getVida(),mejor2->getVida(),mejor1->getFitness(),mejor2->getFitness(),mejor1->getProbabilidad(),mejor2->getProbabilidad(),mejor1->getSuperior(),mejor2->getSuperior(),mejor1->getInferior(),mejor2->getInferior(),mejor1->getSupervivncia(),mejor2->getSupervivncia(),path,back);
-         qDebug()<<"PASA";
-         arduino::getInstance().escribir(aLcd);
-         qApp->processEvents();
-         qDebug()<< aLcd.c_str();
-          bool mod3 = false;
-          string recibido = sock->escuchaEnvia(8080, mensaje);
-          qDebug()<<recibido.c_str();
-          serial->DeserealizarPartida(recibido,&(sock->play),&(sock->turno),&mod3);
-          if (sock->turno != 0 && sock->turno%3 == 0){
-              qDebug()<<"ITERACION 3";
-              Tablero::getInstance().moverTorres();
-              int** path= aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
-              int** back= solveMaze(Tablero::getInstance().cuadriculaInt);
-              string mensaje = serial->serializarIteracion3(Tablero::getInstance().cuadriculaInt, path, back);
-              string recibido = sock->escuchaEnvia(8080, mensaje);
+         if (sock->turno != 0 && sock->turno%3 == 0){
+             qDebug()<<"ITERACION 3";
+             Tablero::getInstance().moverTorres();
+             int** path= aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
+             int** back= solveMaze(Tablero::getInstance().cuadriculaInt);
+             string mensaje = serial->serializarIteracion3(Tablero::getInstance().cuadriculaInt, path, back);
+             string recibido = sock->escuchaEnvia(8080, mensaje);
 
-          }
-          aLcd ="";
+         }
+         else{
+             qDebug()<<"CAMBIO";
+             poblacion1->creacion(4);
+             poblacion2->creacion(4);
+             Gladiador* mejor1=poblacion1->mejor();
+             Gladiador* mejor2=poblacion2->mejor();
+             Tablero::getInstance().generarTorre();
+             int** path= aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
+             int** back= solveMaze(Tablero::getInstance().cuadriculaInt);
+             for (int i = 0; i<4 ; i++){
+                 aLcd += atributos[i];
+                 aLcd += mejor1->atributos[i];
+             }
+             aLcd += "*";
+             for (int i = 0; i<4 ; i++){
+                 aLcd += atributos[i];
+                 aLcd += mejor2->atributos[i];
+             }
+             string mensaje = serial->serializarTableroGladiador(Tablero::getInstance().cuadriculaInt,mejor1->getEdad(),mejor2->getEdad(),mejor1->getEmocional(),mejor2->getEmocional(),mejor1->getCondicion(),mejor2->getCondicion(),mejor1->getResistencia(),mejor2->getResistencia(),mejor1->getVelocidad(),mejor2->getVelocidad(),mejor1->getGeneracion(),
+                                                                                      mejor2->getGeneracion(),mejor1->getId(),mejor2->getId(),mejor2->getVida(),mejor2->getVida(),mejor1->getFitness(),mejor2->getFitness(),mejor1->getProbabilidad(),mejor2->getProbabilidad(),mejor1->getSuperior(),mejor2->getSuperior(),mejor1->getInferior(),mejor2->getInferior(),mejor1->getSupervivncia(),mejor2->getSupervivncia(),path,back);
+             qDebug()<<"PASA";
+             arduino::getInstance().escribir(aLcd);
+             qApp->processEvents();
+             qDebug()<< aLcd.c_str();
+              bool mod3 = false;
+              string recibido = sock->escuchaEnvia(8080, mensaje);
+              qDebug()<<recibido.c_str();
+              serial->DeserealizarPartida(recibido,&(sock->play),&(sock->turno),&mod3);
+
+              aLcd ="";
+
+         }
+
 
      }
      arduino::getInstance().escribir("  FIN DEL JUEGO * FIN DEL JUEGO");
