@@ -6,6 +6,30 @@ Poblacion::Poblacion()
 {
 
 }
+
+void Poblacion::Grafico(){
+    Nodo* temp= Gladiadores->getHead();
+    Gladiador* mejor= temp->getGladiador();
+    temp=temp->getSiguiente();
+    int i=0;
+    cout<<"********holiii******"<<endl;
+    while(temp!=nullptr){
+        if(temp->getGladiador()->getGeneracion()==this->generacion){
+            mejor=temp->getGladiador();
+            i+=mejor->getFitness();
+            temp= temp->getSiguiente();
+        }else{
+            temp= temp->getSiguiente();
+        }
+    }
+    cout<<i<<endl;
+    i=i/5;
+    this->grafico+=std::to_string(i)+",";
+    cout<<this->grafico<<endl;
+}
+string Poblacion::getGrafico(){
+    return this->grafico;
+}
 int* Poblacion::dectobin(int num){
     int* bin= new int[8];
     int i=7;
@@ -135,6 +159,7 @@ void Poblacion::inversion(){
 void Poblacion::creacion(int cantidad){
     seleccion();
     int transfromar;
+    this->generacion=this->generacion+1;
     for (int i=0;i<cantidad;i++) {
         int num = rand()%30;;
         transfromar = num;
@@ -152,18 +177,17 @@ void Poblacion::creacion(int cantidad){
         int superior=bintodec(datos[3]);
         int inferior=bintodec(datos[4]);
         int velocidad=bintodec(datos[5]);
-        int generacion=this->generacion+1;
+        int generacion=this->generacion;
         Gladiador* nuevoGladiador= new Gladiador(mejores[0]->getVida(),id,edad,emocional,condicion,superior,inferior,velocidad,generacion);
         int mejor = rand()%2;;
         nuevoGladiador->setvida(mejores[mejor]->getVida());
         insercion(nuevoGladiador);
     }
-    this->generacion=generacion+1;
+    Grafico();
 }
 void Poblacion::poblacionInicial(int cantidad){
     for (int i=0;i<cantidad;i++) {
         int vida=2;
-        //crear id
         int id=rand()%3000;;
         int edad=(rand()%20 +1);
         int emocional=(rand()%10 +1);
@@ -176,4 +200,5 @@ void Poblacion::poblacionInicial(int cantidad){
         Gladiador* nuevoGladiador= new Gladiador(vida,id,edad,emocional,condicion,superior,inferior,velocidad,generacion);
         insercion(nuevoGladiador);
     }
+    Grafico();
 }

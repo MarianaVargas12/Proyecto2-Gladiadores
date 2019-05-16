@@ -26,8 +26,8 @@ int** printSolution(int sol[N][N])
                 sol[i+1][j]=7;
                 i=i+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i+1][j+1]==1){
@@ -35,16 +35,16 @@ int** printSolution(int sol[N][N])
                 i=i+1;
                 j=j+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i][j+1]==1){
                 sol[i][j+1]=7;
                 j=j+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
         }else if (i==9 && j==0) {
@@ -52,8 +52,8 @@ int** printSolution(int sol[N][N])
                 sol[i-1][j]=7;
                 i=i-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i-1][j+1]==1){
@@ -61,16 +61,16 @@ int** printSolution(int sol[N][N])
                 i=i-1;
                 j=j+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i][j+1]==1){
                 sol[i][j+1]=7;
                 j=j+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
         }else if (i==0 && j==9) {
@@ -78,8 +78,8 @@ int** printSolution(int sol[N][N])
                 sol[i+1][j]=7;
                 i=i+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i+1][j-1]==1){
@@ -87,16 +87,16 @@ int** printSolution(int sol[N][N])
                 i=i+1;
                 j=j-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i][j-1]==1){
                 sol[i][j-1]=7;
                 j=j-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
         }else if (i==0) {
@@ -104,8 +104,8 @@ int** printSolution(int sol[N][N])
                 sol[i+1][j]=7;
                 i=i+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i+1][j+1]==1){
@@ -113,16 +113,16 @@ int** printSolution(int sol[N][N])
                 i=i+1;
                 j=j+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i][j+1]==1){
                 sol[i][j+1]=7;
                 j=j+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i+1][j-1]==1){
@@ -130,16 +130,16 @@ int** printSolution(int sol[N][N])
                 i=i+1;
                 j=j-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i][j-1]==1){
                 sol[i][j-1]=7;
                 j=j-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
         }else if (j==0) {
@@ -147,8 +147,8 @@ int** printSolution(int sol[N][N])
                 sol[i+1][j]=7;
                 i=i+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i+1][j+1]==1){
@@ -156,16 +156,16 @@ int** printSolution(int sol[N][N])
                 i=i+1;
                 j=j+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i][j+1]==1){
                 sol[i][j+1]=7;
                 j=j+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i-1][j+1]==1){
@@ -173,16 +173,16 @@ int** printSolution(int sol[N][N])
                 i=i-1;
                 j=j+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i-1][j]==1){
                 sol[i-1][j]=7;
                 i=i-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
         }else if (i==9) {
@@ -190,8 +190,8 @@ int** printSolution(int sol[N][N])
                 sol[i][j+1]=7;
                 j=j+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i-1][j+1]==1){
@@ -199,16 +199,16 @@ int** printSolution(int sol[N][N])
                 i=i-1;
                 j=j+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i-1][j]==1){
                 sol[i-1][j]=7;
                 i=i-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i-1][j-1]==1){
@@ -216,16 +216,16 @@ int** printSolution(int sol[N][N])
                 i=i-1;
                 j=j-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i][j-1]==1){
                 sol[i][j-1]=7;
                 j=j-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
         }else if (j==9) {
@@ -233,8 +233,8 @@ int** printSolution(int sol[N][N])
                 sol[i+1][j]=7;
                 i=i+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i+1][j-1]==1){
@@ -242,16 +242,16 @@ int** printSolution(int sol[N][N])
                 i=i+1;
                 j=j-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i][j-1]==1){
                 sol[i][j-1]=7;
                 j=j-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i-1][j-1]==1){
@@ -259,16 +259,16 @@ int** printSolution(int sol[N][N])
                 i=i-1;
                 j=j-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i-1][j]==1){
                 sol[i-1][j]=7;
                 i=i-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
 
@@ -277,8 +277,8 @@ int** printSolution(int sol[N][N])
                 sol[i+1][j]=7;
                 i=i+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i+1][j+1]==1){
@@ -286,16 +286,16 @@ int** printSolution(int sol[N][N])
                 i=i+1;
                 j=j+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i][j+1]==1){
                 sol[i][j+1]=7;
                 j=j+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i+1][j-1]==1){
@@ -303,16 +303,16 @@ int** printSolution(int sol[N][N])
                 i=i+1;
                 j=j-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i][j-1]==1){
                 sol[i][j-1]=7;
                 j=j-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i-1][j-1]==1){
@@ -320,16 +320,16 @@ int** printSolution(int sol[N][N])
                 i=i-1;
                 j=j-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i-1][j]==1){
                 sol[i-1][j]=7;
                 i=i-1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
             else if(sol[i-1][j+1]==1){
@@ -337,8 +337,8 @@ int** printSolution(int sol[N][N])
                 i=i-1;
                 j=j+1;
                 path[ruta]= new int[2];
-                path[ruta][0]=j;
-                path[ruta][1]=i;
+                path[ruta][0]=i;
+                path[ruta][1]=j;
                 ruta++;
             }
         }

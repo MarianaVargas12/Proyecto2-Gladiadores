@@ -118,5 +118,4 @@ int main(int argc, char *argv[])
      arduino::getInstance().escribir("  FIN DEL JUEGO * FIN DEL JUEGO");
      return a.exec();
     //return 0;
-
 }
