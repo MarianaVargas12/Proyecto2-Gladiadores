@@ -358,25 +358,29 @@ bool isSafe(int maze[N][N], int x, int y)
    path is possible, otherwise return true and prints the path in the
    form of 1s. Please note that there may be more than one solutions,
    this function prints one of the feasible solutions.*/
-int** solveMaze(int maze[N][N])
+int** solveMaze(int maze[N][N], int x, int y)
 {
-    int sol[N][N] = { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    };
-    if(solveMazeUtil(maze, 0, 0, sol) == false)
-    {
+    if(0>x || x>=N || 0>y || y>=N ){
         printf("Solution doesn't exist");
-    }else {
-        int** back= printSolution(sol);
-        return back;;
+    }else{
+        int sol[N][N] = { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+        if(solveMazeUtil(maze, x, y, sol) == false)
+        {
+            printf("Solution doesn't exist");
+        }else {
+            int** back= printSolution(sol);
+            return back;;
+        }
     }
 }
 /* A recursive utility function to solve Maze problem */
