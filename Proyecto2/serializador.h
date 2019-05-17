@@ -27,6 +27,7 @@ public:
     string serializarIteracion3(int matrix[10][10], int edad, int edadBack, int emocional, int emocionalBack,
     int condicionFisica,int condicionFisicaBack, int resistencia, int resistenciaBack, int velocidad, int velocidadBack, int generacion, int generacionBack, int id, int idBack, int vida, int vidaBack, int fitness, int fitnessBack, int probabilidad, int probabilidadBack,
     int troncoSuperior, int troncoSuperiorBack, int troncoInferior, int troncoInferiorBack, int supervivenciaGen, int supervivenciaGenBack, int** aStar, int** backTrack, int ubicacion[2]);
+    string serializarGrafico(string grafico1, string grafico2);
 };
 
 #endif // SERIALIZADOR_H

@@ -101,6 +101,7 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
     }
     if (isDestination(src.first, src.second, dest) == true)
     {
+
         printf ("We are already at the destination\n");
     }
     bool closedList[ROW][COL];

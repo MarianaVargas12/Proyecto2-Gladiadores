@@ -16,6 +16,7 @@ bool isSafe(int maze[N][N], int x, int y){
 }
 int** solveMaze(int maze[N][N], int x, int y)
 {
+    cout<<"inicio"<<endl;
     if(0>x || x>=N || 0>y || y>=N ){
         printf("Solution doesn't exist");
     }else{
@@ -33,12 +34,13 @@ int** solveMaze(int maze[N][N], int x, int y)
         int cont=1;
         int** solution = new int*[30];
         solution[0]= new int[2];
-        solution[0][0]=0;
-        solution[0][1]=0;
+        solution[0][0]=x;
+        solution[0][1]=y;
         if(solveMazeUtil(maze, x, y, sol, solution, cont) == false)
         {
             printf("Solution doesn't exist");
         }else {
+            cout<<"solution found"<<solution<<endl;
             return solution;;
         }
     }
@@ -47,7 +49,6 @@ int** solveMaze(int maze[N][N], int x, int y)
 bool solveMazeUtil(int maze[N][N], int x, int y, int sol[N][N],int **solution, int cont)
 {
     // if (x,y is goal) return true
-    cout<<x<<"solve"<<y<<endl;
     if(x == N-1 && y == N-1)
     {
         sol[x][y] = 1;
@@ -55,7 +56,7 @@ bool solveMazeUtil(int maze[N][N], int x, int y, int sol[N][N],int **solution, i
     }
     // Check if maze[x][y] is valid
     if( isSafe(maze, x, y) == true && sol[x][y] != 5 && sol[x][y] != 1){
-        cout<<x<<"********"<<y<<endl;
+
         sol[x][y] = 1;
         if (solveMazeUtil(maze, x+1, y, sol, solution, cont+1) == true){
             solution[cont]= new int[2];

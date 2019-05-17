@@ -16,8 +16,8 @@ Gladiador::Gladiador(int vida,int id,int edad, int emocional, int condicionfisic
     setFitness();
     setProbabilidad();
     this->atributos[0] = std::to_string(vida);
-    this->atributos[1] = std::to_string(id);
-    this->atributos[2] = std::to_string(generacion);
+    this->atributos[2] = std::to_string(velocidad);
+    this->atributos[3] = std::to_string(generacion);
     //this->atributos[3] = std::to_string(velocidad);
 }
 
@@ -109,5 +109,5 @@ int Gladiador::getVida(){
 void Gladiador::setFitness(){
     this->fitness= Velocidad+condicionFisica+troncoSuperior+troncoInferior;
     this->fitness= Velocidad+condicionFisica+troncoSuperior+troncoInferior-edad;
-    this->atributos[3] = std::to_string(fitness);
+    this->atributos[1] = std::to_string(fitness);
 }

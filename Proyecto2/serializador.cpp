@@ -177,6 +177,20 @@ int troncoSuperior, int troncoSuperiorBack, int troncoInferior, int troncoInferi
     return buffer.GetString();
 
 }
+string serializador::serializarGrafico(string grafico1, string grafico2){
+    const char* json = "{\"grafico\":\"123456789\","
+                       "\"grafico2\":\"123456789\"}";
+    Document d;
+    d.Parse(json);
+    d["grafico"].SetString(grafico1.c_str(),sizeof(char)*grafico1.length());
+
+    d["grafico2"].SetString(grafico2.c_str(),sizeof(char)*grafico2.length());
+    rapidjson::StringBuffer buffer;
+    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+    d.Accept(writer);
+    qDebug()<<buffer.GetString();
+    return buffer.GetString();
+}
 void serializador::DeserealizarPartida(string json,bool *play, int *turno, bool *mod3){
     Document d;
     d.Parse(json.c_str());

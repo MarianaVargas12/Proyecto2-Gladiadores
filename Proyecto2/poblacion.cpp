@@ -127,7 +127,7 @@ Gladiador* Poblacion::mejor(){
     }
     return mejor;
 }
-void Poblacion::mutacion(){
+void Poblacion::inversion(){
     int i=0;
     int j=0;
     while (i<6) {
@@ -146,7 +146,7 @@ void Poblacion::mutacion(){
 }
 
 //variaciones aleatorias
-void Poblacion::inversion(){
+void Poblacion::mutacion(){
     int num;
     int i=0;
     while(i<6){
