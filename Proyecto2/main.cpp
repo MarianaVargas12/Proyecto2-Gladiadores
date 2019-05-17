@@ -103,7 +103,8 @@ int main(int argc, char *argv[])
                  envio[0] = back[0][0];
                  envio[1] = back[0][1];
              }
-             string mensaje = serial->serializarIteracion3(Tablero::getInstance().cuadriculaInt, path, back, envio);
+             string mensaje = serial->serializarIteracion3(Tablero::getInstance().cuadriculaInt,mejor1->getEdad(),mejor2->getEdad(),mejor1->getEmocional(),mejor2->getEmocional(),mejor1->getCondicion(),mejor2->getCondicion(),mejor1->getResistencia(),mejor2->getResistencia(),mejor1->getVelocidad(),mejor2->getVelocidad(),mejor1->getGeneracion(),
+                                                           mejor2->getGeneracion(),mejor1->getId(),mejor2->getId(),1,1,mejor1->getFitness(),mejor2->getFitness(),mejor1->getProbabilidad(),mejor2->getProbabilidad(),mejor1->getSuperior(),mejor2->getSuperior(),mejor1->getInferior(),mejor2->getInferior(),mejor1->getSupervivncia(),mejor2->getSupervivncia(),path,back,envio);
              string recibido = sock->escuchaEnvia(8080, mensaje);
              if (recibido == "true"){
                  flag = false;
