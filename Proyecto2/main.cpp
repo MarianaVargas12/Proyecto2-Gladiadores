@@ -18,7 +18,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    /*QApplication a(argc, argv);
     srand(time(0));
 
     for ( int x = 0;x<20; x++) {
@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
                  envio[1] = back[0][1];
              }
              string mensaje = serial->serializarIteracion3(Tablero::getInstance().cuadriculaInt, path, back, envio);
-             string recibido = sock->escuchaEnvia(8080, mensaje);
+             //string recibido = sock->escuchaEnvia(8080, mensaje);
              if (recibido == "true"){
                  flag = false;
              }
@@ -135,9 +135,9 @@ int main(int argc, char *argv[])
              qApp->processEvents();
              qDebug()<< aLcd.c_str();
               bool mod3 = false;
-              string recibido = sock->escuchaEnvia(8080, mensaje);
-              qDebug()<<recibido.c_str();
-              serial->DeserealizarPartida(recibido,&(sock->play),&(sock->turno),&mod3);
+              //string recibido = sock->escuchaEnvia(8080, mensaje);
+              //qDebug()<<recibido.c_str();
+              //serial->DeserealizarPartida(recibido,&(sock->play),&(sock->turno),&mod3);
 
               aLcd ="";
               back[1][0]=0;
@@ -145,12 +145,21 @@ int main(int argc, char *argv[])
               path[1][0]=0;
               path[1][1]=0;
               flag = true;
+
          }
 
 
      }
      arduino::getInstance().escribir("  FIN DEL JUEGO * FIN DEL JUEGO");
      return a.exec();
-    //return 0;
+    //return 0;*/
+    srand(time(0));
+
+    for ( int x = 0;x<20; x++) {
+        Tablero::getInstance().generarTorre();
+    }
+    Pair src = make_pair(0, 0);
+    Pair dest = make_pair(9, 9);
+    int** path= aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
 
 }
