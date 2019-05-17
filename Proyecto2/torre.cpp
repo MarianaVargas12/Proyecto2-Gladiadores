@@ -423,7 +423,9 @@ void torre::actualizarCuadrosAlcance(){
 
 }
 
-void torre::moverse(){
+void torre::moverse(int x,int y){
+    int xJugador = x;
+    int yJugador = y;
     //numero random para la direccion en la que se va a mover
     int movimiento = rand()%4+1;
     /*1 arriba
@@ -437,6 +439,9 @@ void torre::moverse(){
         if(this->getY() / 60 != 0 && Tablero::getInstance().cuadricula[this->getY()/60-1][(this->getX()/60)]->ocupado == false){
             if(this->getX()/60 == 0 && this->getY()/60 == 1){
                 qDebug()<<"No se pudo mover arriba, coincidia con el punto inicial";
+            }
+            else if (this->getY()/60 - 1 == yJugador) {
+                qDebug()<<"No se pudo mover arriba, coincidia con el jugador";
             }
             else{
             Tablero::getInstance().cuadricula[this->getY()/60][this->getX()/60]->ocupado = false;
@@ -452,6 +457,9 @@ void torre::moverse(){
             if(this->getX()/60 == 8 && this->getY()/60 == 9){
                 qDebug()<<"No se pudo mover a la derecha, coincidia con el punto final";
             }
+            else if (this->getX()/60 + 1 == xJugador) {
+                qDebug()<<"No se pudo mover a la derecha, coincidia con el jugador";
+            }
             else{
             Tablero::getInstance().cuadricula[this->getY()/60][this->getX()/60]->ocupado = false;
             this->setX(this->getX()+60);
@@ -465,6 +473,9 @@ void torre::moverse(){
             if(this->getX()/60 == 9 && this->getY()/60 == 8){
                 qDebug()<<"No se pudo mover a la abajo, coincidia con el punto final";
             }
+            else if (this->getY()/60 + 1 == yJugador) {
+                qDebug()<<"No se pudo mover abajo, coincidia con el jugador";
+            }
             else{
             Tablero::getInstance().cuadricula[this->getY()/60][this->getX()/60]->ocupado = false;
             this->setY(this->getY()+60);
@@ -476,6 +487,9 @@ void torre::moverse(){
         if(this->getX() / 60 != 0 && Tablero::getInstance().cuadricula[this->getY()/60][this->getX()/60 -1]->ocupado == false){
             if(this->getX()/60 == 1 && this->getY()/60 == 0){
                 qDebug()<<"No se pudo mover a la izquierda, coincidia con el punto inicial";
+            }
+            else if (this->getX()/60 - 1 == xJugador) {
+                qDebug()<<"No se pudo mover a la izquierda, coincidia con el jugador";
             }
             else{
             Tablero::getInstance().cuadricula[this->getY()/60][this->getX()/60]->ocupado = false;

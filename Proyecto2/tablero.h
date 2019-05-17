@@ -29,7 +29,7 @@ public:
     //!
     //! \brief moverTorres mueve todas las torres del tablero
     //!
-    void moverTorres();
+    void moverTorres(int x,int y);
     //!
     //! \brief actualizarMatricula actualiza la matriz de enteros
     //!

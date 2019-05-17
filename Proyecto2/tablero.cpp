@@ -67,11 +67,13 @@ void Tablero::imprimirMatriz()
     }
 }
 
-void Tablero::moverTorres()
+void Tablero::moverTorres(int x,int y)
 {
+    int xJugador = x;
+    int yJugador = y;
     for(Node* nodoTorre = listaTorres->getFirst();nodoTorre != nullptr; nodoTorre = nodoTorre->getNext()){
         torre* torreAMover = (torre*)nodoTorre->getData();
-        torreAMover->moverse();
+        torreAMover->moverse(xJugador,yJugador);
     }
     actualizarMatriz();
 }

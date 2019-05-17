@@ -18,7 +18,7 @@ public:
     void setX(int value);
     int getY() const;
     void setY(int value);
-    void moverse();
+    void moverse(int x,int y);
     void disparar();
     //!
     //! \brief actualizarCuadrosAlcance actualiza los cuadros que rodean a la torre segun su posicion

@@ -21,17 +21,19 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     srand(time(0));
 
-    for ( int x = 0;x<50; x++) {
+    for ( int x = 0;x<20; x++) {
         Tablero::getInstance().generarTorre();
     }
-    Poblacion* poblacion1=new Poblacion();
-    poblacion1->poblacionInicial(5);
-    Poblacion* poblacion2=new Poblacion();
-    poblacion2->poblacionInicial(5);
-    Gladiador* mejor1=poblacion1->mejor();
-    Gladiador* mejor2=poblacion2->mejor();
+    Poblacion* poblacion1;//=new Poblacion();
+   // poblacion1->poblacionInicial(5);
+    Poblacion* poblacion2;//=new Poblacion();
+   // poblacion2->poblacionInicial(5);
+    Gladiador* mejor1;//=poblacion1->mejor();
+    Gladiador* mejor2;//=poblacion2->mejor();
     Tablero::getInstance().imprimirMatriz();
     bool flag = true;
+    bool inicial = true;
+    int envio[2];
     cout<<"\n....................."<<endl;
     //Tablero::getInstance().moverTorres();
 
@@ -40,7 +42,7 @@ int main(int argc, char *argv[])
     Socket *sock = &Socket::getInstance();
     serializador *serial = &serializador::getInstance();
     int** path= aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
-    int** back= solveMaze(Tablero::getInstance().cuadriculaInt);
+    int** back= solveMaze(Tablero::getInstance().cuadriculaInt,0,0);
     for(int i =0; i<30;i++){
         if (back[i][0]==9 && back[i][1]==9){
             cout<<back[i][0]<<back[i][1];
@@ -76,13 +78,36 @@ int main(int argc, char *argv[])
 //     arduino::getInstance().escribir(aLcd);
 
      while (sock->play){
+         if (inicial){
+             qDebug()<<"INICIAL";
+             poblacion1=new Poblacion();
+             poblacion1->poblacionInicial(5);
+             poblacion2=new Poblacion();
+             poblacion2->poblacionInicial(5);
+             mejor1=poblacion1->mejor();
+             mejor2=poblacion2->mejor();
+             inicial = false;
+         }
          if (sock->turno != 0 && sock->turno%3 == 0){
              qDebug()<<"ITERACION 3";
-             Tablero::getInstance().moverTorres();
-             int** path= aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
-             int** back= solveMaze(Tablero::getInstance().cuadriculaInt);
-             string mensaje = serial->serializarIteracion3(Tablero::getInstance().cuadriculaInt, path, back);
+             Tablero::getInstance().moverTorres(path[1][0],path[1][1]);
+             src = make_pair(path[1][0], path[1][1]);
+             path= aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
+             back= solveMaze(Tablero::getInstance().cuadriculaInt,back[1][0],back[1][1]);
+             qDebug()<<"Logro mover torres";
+             if (flag){
+                 envio[0] = path[0][0];
+                 envio[1] = path[0][1];
+             }
+             else{
+                 envio[0] = back[0][0];
+                 envio[1] = back[0][1];
+             }
+             string mensaje = serial->serializarIteracion3(Tablero::getInstance().cuadriculaInt, path, back, envio);
              string recibido = sock->escuchaEnvia(8080, mensaje);
+             if (recibido == "true"){
+                 flag = false;
+             }
 
          }
          else{
@@ -93,7 +118,7 @@ int main(int argc, char *argv[])
              Gladiador* mejor2=poblacion2->mejor();
              Tablero::getInstance().generarTorre();
              int** path= aStarSearch(Tablero::getInstance().cuadriculaInt, src, dest);
-             int** back= solveMaze(Tablero::getInstance().cuadriculaInt);
+             int** back= solveMaze(Tablero::getInstance().cuadriculaInt,0,0);
              for (int i = 0; i<4 ; i++){
                  aLcd += atributos[i];
                  aLcd += mejor1->atributos[i];
@@ -104,7 +129,7 @@ int main(int argc, char *argv[])
                  aLcd += mejor2->atributos[i];
              }
              string mensaje = serial->serializarTableroGladiador(Tablero::getInstance().cuadriculaInt,mejor1->getEdad(),mejor2->getEdad(),mejor1->getEmocional(),mejor2->getEmocional(),mejor1->getCondicion(),mejor2->getCondicion(),mejor1->getResistencia(),mejor2->getResistencia(),mejor1->getVelocidad(),mejor2->getVelocidad(),mejor1->getGeneracion(),
-                                                                                      mejor2->getGeneracion(),mejor1->getId(),mejor2->getId(),mejor2->getVida(),mejor2->getVida(),mejor1->getFitness(),mejor2->getFitness(),mejor1->getProbabilidad(),mejor2->getProbabilidad(),mejor1->getSuperior(),mejor2->getSuperior(),mejor1->getInferior(),mejor2->getInferior(),mejor1->getSupervivncia(),mejor2->getSupervivncia(),path,back);
+                                                                                      mejor2->getGeneracion(),mejor1->getId(),mejor2->getId(),1,1,mejor1->getFitness(),mejor2->getFitness(),mejor1->getProbabilidad(),mejor2->getProbabilidad(),mejor1->getSuperior(),mejor2->getSuperior(),mejor1->getInferior(),mejor2->getInferior(),mejor1->getSupervivncia(),mejor2->getSupervivncia(),path,back);
              qDebug()<<"PASA";
              arduino::getInstance().escribir(aLcd);
              qApp->processEvents();
@@ -115,7 +140,11 @@ int main(int argc, char *argv[])
               serial->DeserealizarPartida(recibido,&(sock->play),&(sock->turno),&mod3);
 
               aLcd ="";
-
+              back[1][0]=0;
+              back[1][1]=0;
+              path[1][0]=0;
+              path[1][1]=0;
+              flag = true;
          }
 
 
@@ -123,4 +152,5 @@ int main(int argc, char *argv[])
      arduino::getInstance().escribir("  FIN DEL JUEGO * FIN DEL JUEGO");
      return a.exec();
     //return 0;
+
 }

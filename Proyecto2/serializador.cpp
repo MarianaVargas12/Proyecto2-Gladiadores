@@ -4,9 +4,10 @@ serializador::serializador()
 {
 
 }
-string serializador::serializarIteracion3(int matrix[10][10], int** aStar, int** backTrack){
+string serializador::serializarIteracion3(int matrix[10][10], int** aStar, int** backTrack, int ubicacion[2]){
     const char* json ="{\"aStar\":[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],"
                       "\"backTrack\":[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],"
+                      "\"ubicacion\":[0,0],"
                        "\"matrix\":[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]}";
     Document d;
     d.Parse(json);
@@ -39,6 +40,8 @@ string serializador::serializarIteracion3(int matrix[10][10], int** aStar, int**
         }
 
     }
+   d["ubicacion"].GetArray()[0]=ubicacion[0];
+   d["ubicacion"].GetArray()[1]=ubicacion[1];
     rapidjson::StringBuffer buffer;
     rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
     d.Accept(writer);
