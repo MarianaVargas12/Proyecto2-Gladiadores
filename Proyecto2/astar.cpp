@@ -1,3 +1,7 @@
+/*Article title:	A* Search Algorithm - GeeksforGeeks
+Website title:	GeeksforGeeks
+URL:	https://www.geeksforgeeks.org/a-search-algorithm/
+ * */
 #include<bits/stdc++.h>
 #include"tablero.h"
 using namespace std;
@@ -5,22 +9,22 @@ using namespace std;
 #define ROW 10
 #define COL 10
 
-
-
 typedef pair<int, int> Pair;
 typedef pair<double, pair<int, int>> pPair;
-
+//estructura de una celula
 struct cell
 {
     int parent_i, parent_j;
     // f = g + h
     double f, g, h;
 };
+// verifica si las coordenadas estan dentro del rango de la matriz
 bool isValid(int row, int col)
 {
     return (row >= 0) && (row < ROW) &&
            (col >= 0) && (col < COL);
 }
+// verifica si donde se encuentra esta bloqueado o puede seguir
 bool isUnBlocked(int grid[][COL], int row, int col)
 {
     if (grid[row][col] == 0)
@@ -28,7 +32,7 @@ bool isUnBlocked(int grid[][COL], int row, int col)
     else
         return (false);
 }
-
+//revisa si se encuentra en el destino a la que quiere llegar
 bool isDestination(int row, int col, Pair dest)
 {
     if (row == dest.first && col == dest.second)
@@ -36,25 +40,21 @@ bool isDestination(int row, int col, Pair dest)
     else
         return (false);
 }
-
+//calcula el valor de H segun la formula vista en clases
 double calculateHValue(int row, int col, Pair dest)
 {
     return ((double)sqrt ((row-dest.first)*(row-dest.first)+ (col-dest.second)*(col-dest.second)));
 }
-
+//encargado de crear el array con las coordenadas que debe de seguir el gladiador
 int** tracePath(cell cellDetails[][COL], Pair dest)
 {
-    printf ("\nThe Path is ");
     int row = dest.first;
     int col = dest.second;
     int** path= new int*[30];
-    //int path[100][2];
     int ruta=0;
-
     stack<Pair> Path;
 
-    while (!(cellDetails[row][col].parent_i == row
-             && cellDetails[row][col].parent_j == col ))
+    while (!(cellDetails[row][col].parent_i == row && cellDetails[row][col].parent_j == col ))
     {
         Path.push (make_pair (row, col));
         int temp_row = cellDetails[row][col].parent_i;
@@ -72,31 +72,25 @@ int** tracePath(cell cellDetails[][COL], Pair dest)
         path[ruta][0]=p.first;
         path[ruta][1]=p.second;
         ruta++;
-        //printf("-> (%d,%d) ",p.first,p.second);
-    }/*
-    for(int i =0; i<30;i++){
-        if (path[i][0]==9 && path[i][1]==9){
-            qDebug()<<path[i][0]<<path[i][1];
-            break;
-        }
-        else{
-            qDebug()<<path[i][0]<<path[i][1]<<"-->";
-        }
-    }*/
+    }
     return path;
 }
+
+//busca la ruta mas optima de acuerdo al valor de H
 int** aStarSearch(int grid[][COL], Pair src, Pair dest)
 {
-    cout<<"*********a star**********"<<endl;
     Tablero::getInstance().imprimirMatriz();
+    //revisa si las coordenados estan dentro de la matriz
     if (isValid (src.first, src.second) == false)
     {
         printf ("Source is invalid\n");
     }
+    //revisa que las coordenadas del destino esta dentro del rango de la matriz
     if (isValid (dest.first, dest.second) == false)
     {
         printf ("Destination is invalid\n");
     }
+    //revisa que las las celdas de los lados no esten bloqueadas
     if (isUnBlocked(grid, src.first, src.second) == false || isUnBlocked(grid, dest.first, dest.second) == false)
     {
         printf ("Source or the destination is blocked\n");
@@ -135,24 +129,16 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
     set<pPair> openList;
     openList.insert(make_pair (0.0, make_pair (i, j)));
     bool foundDest = false;
-    int n;
-    int x;
-    int y;
-    int L;
     while (!openList.empty())
     {
         pPair p = *openList.begin();
         openList.erase(openList.begin());
         i = p.second.first;
         j = p.second.second;
-        n= grid[i][j];
         closedList[i][j] = true;
         double gNew, hNew, fNew;
         if (isValid(i-1, j) == true)
         {
-            x=i-1;
-            y=j;
-            n= grid[i-1][j];
             if (isDestination(i-1, j, dest) == true)
             {
                 cellDetails[i-1][j].parent_i = i;
@@ -179,10 +165,6 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
         }
         if (isValid(i+1, j) == true)
         {
-            x=i+1;
-            y=j;
-            L= Tablero::getInstance().cuadriculaInt[i+1][j];
-            n= grid[j][i+1];
             if (isDestination(i+1, j, dest) == true)
             {
                 cellDetails[i+1][j].parent_i = i;
@@ -209,9 +191,6 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
         }
         if (isValid (i, j+1) == true)
         {
-            y=j+1;
-            n= grid[i][j+1];
-            y=j+1;
             if (isDestination(i, j+1, dest) == true)
             {
                 cellDetails[i][j+1].parent_i = i;
@@ -240,9 +219,6 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
         }
         if (isValid(i, j-1) == true)
         {
-            x=i;
-            y=j-1;
-            n= grid[i][j-1];
             if (isDestination(i, j-1, dest) == true)
             {
                 cellDetails[i][j-1].parent_i = i;
@@ -269,9 +245,6 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
         }
         if (isValid(i-1, j+1) == true)
         {
-            x=i-1;
-            y=j+1;
-            n= grid[i-1][j+1];
             if (isDestination(i-1, j+1, dest) == true)
             {
                 cellDetails[i-1][j+1].parent_i = i;
@@ -298,9 +271,6 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
         }
         if (isValid (i-1, j-1) == true)
         {
-            x=i-1;
-            y=j-1;
-            n= grid[i-1][j-1];
             if (isDestination (i-1, j-1, dest) == true)
             {
                 cellDetails[i-1][j-1].parent_i = i;
@@ -328,9 +298,6 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
         }
         if (isValid(i+1, j+1) == true)
         {
-            x=i+1;
-            y=j+1;
-            n= grid[i+1][j+1];
             if (isDestination(i+1, j+1, dest) == true)
             {
                 cellDetails[i+1][j+1].parent_i = i;
@@ -359,9 +326,6 @@ int** aStarSearch(int grid[][COL], Pair src, Pair dest)
         }
         if (isValid (i+1, j-1) == true)
         {
-            x=i+1;
-            y=j-1;
-            n= grid[i+1][j-1];
             if (isDestination(i+1, j-1, dest) == true)
             {
                 cellDetails[i+1][j-1].parent_i = i;
